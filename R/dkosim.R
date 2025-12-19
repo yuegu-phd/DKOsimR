@@ -4,8 +4,10 @@ dkosim <- function(sample_name,
                    moi, moi_pois, p_gi, sd_gi, p_high, mode,
                    pt_neg, pt_pos, pt_wt, pt_ctrl,
                    mu_neg, sd_neg, mu_pos, sd_pos, sd_wt,
-                   bottleneck, n.bottlenecks, n.iterations, resampling){
+                   bottleneck, n.bottlenecks, n.iterations, resampling, lab = FALSE){
 
+# lab = False by default indicating this simulation is run with precise input on each type of genes
+  if (lab == FALSE){
 # print out initialized parameters for this run
 cat("
 # ------------------------------------------------------------
@@ -46,7 +48,50 @@ cat("
 # Pseudo-count:", 5 * 10^(-floor(log10(bottleneck))-1), "
 
 # ------------------------------------------------------------
-\n")
+\n")}
+
+  # lab = True indicates this simulation is run to approximate real lab pattern with inputs on unknown gene class
+  else if (lab == TRUE){
+    # print out initialized parameters for this run
+    cat("
+# ------------------------------------------------------------
+# Simulation Settings Summary:
+# ------------------------------------------------------------
+# Sample Name:", sample_name, "
+# Number of Genes:", n, "
+# Cell Library Size (Initial):", library_size, "
+# Coverage:", coverage,"x
+# Number of Single Knockout(SKO):", n, "
+# Number of Double Knockout(DKO):", n_gene_pairs - n, "
+# Number of Guides per Gene:", n_guide_g, "
+# Number of Constructs:", n_construct, "
+# Variance of Initialized Counts:", round(sd_freq0^2,2), "
+
+# Genetic Interactions (GI):
+## Proportion of GI(%):", p_gi * 100, "
+## Number of Interacting Gene Pairs:", round(p_gi * (n_gene_pairs-n)), "
+## Variance of re-sampled phenotypes w/ GI:", sd_gi^2, "
+
+# Proportion of Each Initialized Gene Class (by theoretical phenotypes):
+## Negative(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ",-1,-0.025)
+## Unknown(%):", pt_wt * 100, "~ TN(0,", sd_wt^2, ",-0.5, 0.5)
+## Non-Targeting Control(%):", pt_ctrl * 100, "~ Delta(0)
+
+# Proportion of Guides (by efficacy):
+## High-efficacy(%):", p_high * 100, "~ TN(0.9, 0.1, 0.6, 1)
+## Low-efficacy(%):", (1-p_high) * 100, "~ TN(0.05, 0.0049, 0, 0.6)
+
+# Multiplicity of Infection (MOI):", moi , "
+# Percentage of viral particles delivered in cells during transfection(%):", round(dpois(1, lambda = moi) * 100, 2) , "~ Poisson(",moi,")
+# Resampling Size based on MOI (Passage Size):", resampling, "
+# Bottleneck Size (", bottleneck / library_size, "x Initial Guide-Level Library Size):", bottleneck, "
+# Number of Bottleneck Encounters (Number of Passages):", n.bottlenecks, "
+# Total Available Doublings:", n.iterations, "
+# Number of Replicates:", 2, "
+# Pseudo-count:", 5 * 10^(-floor(log10(bottleneck))-1), "
+
+# ------------------------------------------------------------
+\n")}
 
 
   # %% [markdown]
@@ -81,23 +126,45 @@ cat("
     n_wt  <- round(pt_wt * n)
     n_ctrl <- round(pt_ctrl * n)
 
-    # sample values
-    p_neg <- rtruncnorm(n_neg, a = -1, b = -0.025, mean = mu_neg, sd = sd_neg)
-    p_pos <- rtruncnorm(n_pos, a = 0.025, b = 1, mean = mu_pos, sd = sd_pos)
-    p_wt  <- rtruncnorm(n_wt, a = -0.025, b = 0.025, mean = 0, sd = sd_wt)
-    p_ctrl <- rep(0, n_ctrl)
+    if (lab == FALSE){
+      # sample values
+      p_neg <- rtruncnorm(n_neg, a = -1, b = -0.025, mean = mu_neg, sd = sd_neg)
+      p_pos <- rtruncnorm(n_pos, a = 0.025, b = 1, mean = mu_pos, sd = sd_pos)
+      p_wt  <- rtruncnorm(n_wt, a = -0.025, b = 0.025, mean = 0, sd = sd_wt)
+      p_ctrl <- rep(0, n_ctrl)
 
-    # combine into one vector
-    p1 <- c(p_neg, p_pos, p_wt, p_ctrl)
+      # combine into one vector
+      p1 <- c(p_neg, p_pos, p_wt, p_ctrl)
 
-    # create class labels
-    class <- c(rep("negative", n_neg),
+      # create class labels
+      class <- c(rep("negative", n_neg),
                rep("positive", n_pos),
                rep("WT", n_wt),
                rep("Non-Targeting Control", n_ctrl))
 
-    # return data frame
-    return(data.frame(p1 = p1, class = class))
+      # return data frame
+      return(data.frame(p1 = p1, class = class))}
+
+    else if (lab == TRUE){
+      # sample values
+      p_neg <- rtruncnorm(n_neg, a = -1, b = -0.025, mean = mu_neg, sd = sd_neg)
+      p_pos <- rtruncnorm(n_pos, a = 0.025, b = 1, mean = mu_pos, sd = sd_pos)
+      p_wt  <- rtruncnorm(n_wt, a = -0.5, b = 0.5, mean = 0, sd = sd_wt)
+      p_ctrl <- rep(0, n_ctrl)
+
+      # combine into one vector
+      p1 <- c(p_neg, p_pos, p_wt, p_ctrl)
+
+      # create class labels
+      class <- c(rep("negative", n_neg),
+                 rep("positive", n_pos),
+                 rep("Unknown", n_wt),
+                 rep("Non-Targeting Control", n_ctrl))
+
+      # return data frame
+      return(data.frame(p1 = p1, class = class))
+
+    }
   }
 
   # FUNCTION 4: grow the cell from sampling by relative frequency
