@@ -2,17 +2,10 @@
 # Author: Yue Gu, Luis Leon Novelo, John Paul Shen, Traver Hart
 
 # install and load required packages
-required_packages <- c("foreach", "doParallel", "xtable", "MCMCpack", "entropy", "truncnorm", "gtools", "plyr", "tidyverse", "data.table")
-for (pkg in required_packages) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg)
-  }
-}
-
 if(!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
 devtools::install_github("yuegu-phd/DKOsimR")
-
+devtools::install(dependencies = TRUE)
 ### Major Modifications Before Each Run
 ### 1. Simulation Name: sample_name
 ### 2. Simulation Settings: initialized parameter
@@ -107,3 +100,5 @@ dkosim(
   n.iterations = 30, # assuming a maximum of 30 doubling cycles if we didnt encounter bottleneck
   resampling = round(moi_pois * bottleneck)# determine resampling size based on moi and bottleneck size
 )
+
+dkosim()

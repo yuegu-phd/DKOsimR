@@ -128,9 +128,9 @@ cat("
 
     if (lab == FALSE){
       # sample values
-      p_neg <- rtruncnorm(n_neg, a = -1, b = -0.025, mean = mu_neg, sd = sd_neg)
-      p_pos <- rtruncnorm(n_pos, a = 0.025, b = 1, mean = mu_pos, sd = sd_pos)
-      p_wt  <- rtruncnorm(n_wt, a = -0.025, b = 0.025, mean = 0, sd = sd_wt)
+      p_neg <- truncnorm::rtruncnorm(n_neg, a = -1, b = -0.025, mean = mu_neg, sd = sd_neg)
+      p_pos <- truncnorm::rtruncnorm(n_pos, a = 0.025, b = 1, mean = mu_pos, sd = sd_pos)
+      p_wt  <- truncnorm::rtruncnorm(n_wt, a = -0.025, b = 0.025, mean = 0, sd = sd_wt)
       p_ctrl <- rep(0, n_ctrl)
 
       # combine into one vector
@@ -147,9 +147,9 @@ cat("
 
     else if (lab == TRUE){
       # sample values
-      p_neg <- rtruncnorm(n_neg, a = -1, b = -0.025, mean = mu_neg, sd = sd_neg)
-      p_pos <- rtruncnorm(n_pos, a = 0.025, b = 1, mean = mu_pos, sd = sd_pos)
-      p_wt  <- rtruncnorm(n_wt, a = -0.5, b = 0.5, mean = 0, sd = sd_wt)
+      p_neg <- truncnorm::rtruncnorm(n_neg, a = -1, b = -0.025, mean = mu_neg, sd = sd_neg)
+      p_pos <- truncnorm::rtruncnorm(n_pos, a = 0.025, b = 1, mean = mu_pos, sd = sd_pos)
+      p_wt  <- truncnorm::rtruncnorm(n_wt, a = -0.5, b = 0.5, mean = 0, sd = sd_wt)
       p_ctrl <- rep(0, n_ctrl)
 
       # combine into one vector
@@ -193,14 +193,14 @@ cat("
     if (mode == "CRISPRn") {
       guide_eff <- ifelse(
         guide_type,
-        rtruncnorm(n, a = 0.6, b = 1, mean = 0.9, sd = 0.1),
-        rtruncnorm(n, a = 0, b = 0.6, mean = 0.05, sd = 0.07)
+        truncnorm::rtruncnorm(n, a = 0.6, b = 1, mean = 0.9, sd = 0.1),
+        truncnorm::rtruncnorm(n, a = 0, b = 0.6, mean = 0.05, sd = 0.07)
       )
     } else if (mode == "CRISPRn-100%Eff") {
       guide_eff <- ifelse(
         guide_type,
         1,
-        rtruncnorm(n, a = 0, b = 1, mean = 0.05, sd = 0.07)
+        truncnorm::rtruncnorm(n, a = 0, b = 1, mean = 0.05, sd = 0.07)
       )
     }
 
@@ -209,7 +209,7 @@ cat("
 
   # FUNCTION 6: genetic interaction values generation - increase sd to enlarge the range of GI
   gi_sample <- function(p){
-    p_i = rtruncnorm(1, a = -1, b = 1, mean = p, sd = sd_gi)
+    p_i = truncnorm::rtruncnorm(1, a = -1, b = 1, mean = p, sd = sd_gi)
     return(p_i)
   }
 

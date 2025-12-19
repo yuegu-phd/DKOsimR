@@ -1,11 +1,11 @@
 Package: DKOsimR
 Type: Package
 Title: What the Package Does (Title Case)
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Yue", "Gu",
+      email = "yue.gu@columbia.edu",
       role = c("aut", "cre")
     )
   )
