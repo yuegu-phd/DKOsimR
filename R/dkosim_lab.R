@@ -1,11 +1,20 @@
 # simulation to approximate real lab design with 3 initialized gene class: negative (essential), unknown, non-targeting control
 # special version of dkosim that is applicable in approximating real lab data patterns in synthetic lethal screens for human cancer cell lines
+# default parameters' value is from Simulation (mimicking Fong) except for sample_name
 dkosim_lab <- function(sample_name,
-                   coverage, n, n_guide_g, n_gene_pairs, n_construct, library_size, sd_freq0,
-                   moi, moi_pois, p_gi, sd_gi, p_high, mode,
-                   pt_neg, pt_pos=0, pt_unknown, pt_ctrl,
-                   mu_neg, sd_neg, mu_pos=0, sd_pos=0, sd_unknown,
-                   bottleneck, n.bottlenecks, n.iterations, resampling){
+                       coverage = 1000, n = 246, n_guide_g = 3, sd_freq0 = 1/2.56,
+                       moi = 0.3, p_gi = 0.03, sd_gi = 1.5, p_high = 0.75, mode="CRISPRn",
+                       pt_neg = 64/246, pt_pos = 0, pt_unknown = 178/246, pt_ctrl = 4/246,
+                       mu_neg = -0.03, sd_neg = 0.25, mu_pos = 0, sd_pos = 0, sd_unknown = 0.2,
+                       size.bottleneck = 2, n.bottlenecks = 1, n.iterations = 30, rseed = NULL){
+
+    # initialize library parameters based on users' input
+    n_gene_pairs = n * (n-1) / 2 + n  # number of unique gene pairs (both SKO and DKO)
+    n_construct = (n*n_guide_g) * ((n-1)*n_guide_g) / 2 + n*n_guide_g  # total number of constructs
+    library_size = n_construct * coverage # number of total cells in the initialized gene-level library
+    moi_pois = dpois(1, moi) # get the number of viral particles delivered per cell during transfection from Poisson(moi) to calculate resampling size
+    bottleneck = size.bottleneck * library_size # bottleneck size
+    resampling = round(moi_pois * bottleneck)# determine resampling size based on moi and bottleneck size
 
 
   # print out initialized parameters for this run
@@ -29,7 +38,7 @@ dkosim_lab <- function(sample_name,
 ## Variance of re-sampled phenotypes w/ GI:", sd_gi^2, "
 
 # Proportion of Each Initialized Gene Class (by theoretical phenotypes):
-## Negative(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ",-1,-0.025)
+## Negative/Essential(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ",-1,-0.025)
 ## Unknown(%):", pt_unknown * 100, "~ TN(0,", sd_unknown^2, ",-0.5, 0.5)
 ## Non-Targeting Control(%):", pt_ctrl * 100, "~ Delta(0)
 
@@ -40,7 +49,7 @@ dkosim_lab <- function(sample_name,
 # Multiplicity of Infection (MOI):", moi , "
 # Percentage of viral particles delivered in cells during transfection(%):", round(dpois(1, lambda = moi) * 100, 2) , "~ Poisson(",moi,")
 # Resampling Size based on MOI (Passage Size):", resampling, "
-# Bottleneck Size (", bottleneck / library_size, "x Initial Guide-Level Library Size):", bottleneck, "
+# Bottleneck Size (", size.bottleneck, "x Initial Guide-Level Library Size):", bottleneck, "
 # Number of Bottleneck Encounters (Number of Passages):", n.bottlenecks, "
 # Total Available Doublings:", n.iterations, "
 # Number of Replicates:", 2, "

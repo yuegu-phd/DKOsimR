@@ -1,18 +1,18 @@
 # simulation with all 4 intialized gene class: negative, wildtype, non-targeting control, positive
-# parameters' value by default is from systematic run (baseline) except for sample_name and n
+# default parameters' value is from systematic run (baseline) except for sample_name and n
 dkosim <- function(sample_name,
                    coverage = 100, n, n_guide_g = 3, sd_freq0 = 1/3.29,
                    moi = 0.3, p_gi = 0.03, sd_gi = 1.5, p_high = 1, mode="CRISPRn-100%Eff",
                    pt_neg = 0.15, pt_pos = 0.05, pt_wt = 0.75, pt_ctrl = 0.05,
                    mu_neg = -0.75, sd_neg = 0.1, mu_pos = 0.75, sd_pos = 0.1, sd_wt = 0.25,
-                   n.bottlenecks = 1, n.iterations = 30, rseed = NULL){
+                   size.bottleneck = 2, n.bottlenecks = 1, n.iterations = 30, rseed = NULL){
 
   # initialize library parameters based on users' input
   n_gene_pairs = n * (n-1) / 2 + n  # number of unique gene pairs (both SKO and DKO)
   n_construct = (n*n_guide_g) * ((n-1)*n_guide_g) / 2 + n*n_guide_g  # total number of constructs
   library_size = n_construct * coverage # number of total cells in the initialized gene-level library
   moi_pois = dpois(1, moi) # get the number of viral particles delivered per cell during transfection from Poisson(moi) to calculate resampling size
-  bottleneck = 2 * library_size # bottleneck size
+  bottleneck = size.bottleneck * library_size # bottleneck size
   resampling = round(moi_pois * bottleneck)# determine resampling size based on moi and bottleneck size
 
 # print out initialized parameters for this run
@@ -48,7 +48,7 @@ cat("
 # Multiplicity of Infection (MOI):", moi , "
 # Percentage of viral particles delivered in cells during transfection(%):", round(dpois(1, lambda = moi) * 100, 2) , "~ Poisson(",moi,")
 # Resampling Size based on MOI (Passage Size):", resampling, "
-# Bottleneck Size (", bottleneck / library_size, "x Initial Guide-Level Library Size):", bottleneck, "
+# Bottleneck Size (", size.bottleneck, "x Initial Guide-Level Library Size):", bottleneck, "
 # Number of Bottleneck Encounters (Number of Passages):", n.bottlenecks, "
 # Total Available Doublings:", n.iterations, "
 # Number of Replicates:", 2, "
