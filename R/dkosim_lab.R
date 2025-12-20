@@ -491,8 +491,8 @@ dkosim_lab <- function(sample_name,
   cell_lib_guide0_A <- cell_lib_guide0[[1]]
   cell_lib_guide0_B <- cell_lib_guide0[[2]]
   ## check the initialized guide-level data
-  print(cell_lib_guide0_A)
-  print(cell_lib_guide0_B)
+  #print(cell_lib_guide0_A)
+  #print(cell_lib_guide0_B)
 
   # Run Simulations
   ## Optimization: Run guide-level simulation for both replicates in parallel
