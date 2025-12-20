@@ -80,23 +80,7 @@ dkosim(sample_name="test",
        n.iterations = 30,
        rseed = 111)
 
-# test excluding parameters with default values: sd_freq0, moi, mode, n.iterations, rseed
-dkosim(sample_name="test",
-       coverage=100,
-       n=60,
-       n_guide_g=3,
-       p_gi=0.03,
-       sd_gi=1.5,
-       p_high=1,
-       pt_neg=0.15,
-       pt_pos=0.05,
-       pt_wt=0.75,
-       pt_ctrl=0.05,
-       mu_neg=-0.75,
-       sd_neg=0.1,
-       mu_pos=0.75,
-       sd_pos=0.1,
-       sd_wt=0.25,
-       n.bottlenecks=1)
+# test on parameters without default values: sample_name, n
+dkosim(sample_name="test", n=60)
 
 # test on the lab approximating mode
