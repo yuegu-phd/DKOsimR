@@ -1,10 +1,10 @@
 # simulation to approximate real lab design with 3 initialized gene class: negative (essential), unknown, non-targeting control
-# applicable in approximating real lab data patterns in synthetic lethal screens for human cancer cell lines
+# special version of dkosim that is applicable in approximating real lab data patterns in synthetic lethal screens for human cancer cell lines
 dkosim_lab <- function(sample_name,
                    coverage, n, n_guide_g, n_gene_pairs, n_construct, library_size, sd_freq0,
                    moi, moi_pois, p_gi, sd_gi, p_high, mode,
-                   pt_neg, pt_pos, pt_wt, pt_ctrl,
-                   mu_neg, sd_neg, mu_pos, sd_pos, sd_wt,
+                   pt_neg, pt_pos=0, pt_unknown, pt_ctrl,
+                   mu_neg, sd_neg, mu_pos=0, sd_pos=0, sd_unknown,
                    bottleneck, n.bottlenecks, n.iterations, resampling){
 
 
@@ -30,7 +30,7 @@ dkosim_lab <- function(sample_name,
 
 # Proportion of Each Initialized Gene Class (by theoretical phenotypes):
 ## Negative(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ",-1,-0.025)
-## Unknown(%):", pt_wt * 100, "~ TN(0,", sd_wt^2, ",-0.5, 0.5)
+## Unknown(%):", pt_unknown * 100, "~ TN(0,", sd_unknown^2, ",-0.5, 0.5)
 ## Non-Targeting Control(%):", pt_ctrl * 100, "~ Delta(0)
 
 # Proportion of Guides (by efficacy):
@@ -75,27 +75,27 @@ dkosim_lab <- function(sample_name,
   }
 
   # FUNCTION 3: simulate p1 by pre-specify gene class
-  p1_sample <- function(n, pt_neg, pt_pos, pt_wt, pt_ctrl) {
+  p1_sample <- function(n, pt_neg, pt_pos, pt_unknown, pt_ctrl) {
     # sample counts per class
     n_neg <- round(pt_neg * n)
     n_pos <- round(pt_pos * n)
-    n_wt  <- round(pt_wt * n)
+    n_unknown  <- round(pt_unknown * n)
     n_ctrl <- round(pt_ctrl * n)
 
 
     # sample values
     p_neg <- truncnorm::rtruncnorm(n_neg, a = -1, b = -0.025, mean = mu_neg, sd = sd_neg)
     p_pos <- truncnorm::rtruncnorm(n_pos, a = 0.025, b = 1, mean = mu_pos, sd = sd_pos)
-    p_wt  <- truncnorm::rtruncnorm(n_wt, a = -0.5, b = 0.5, mean = 0, sd = sd_wt)
+    p_unknown  <- truncnorm::rtruncnorm(n_unknown, a = -0.5, b = 0.5, mean = 0, sd = sd_unknown)
     p_ctrl <- rep(0, n_ctrl)
 
     # combine into one vector
-    p1 <- c(p_neg, p_pos, p_wt, p_ctrl)
+    p1 <- c(p_neg, p_pos, p_unknown, p_ctrl)
 
     # create class labels
     class <- c(rep("negative", n_neg),
                rep("positive", n_pos),
-               rep("Unknown", n_wt),
+               rep("Unknown", n_unknown),
                rep("Non-Targeting Control", n_ctrl))
 
     # return data frame
@@ -157,7 +157,7 @@ dkosim_lab <- function(sample_name,
   initialize_gene_cell_lib0 <- function(){
     ################### STEP 2: initialize p1 & p2 ######################################
     # gene1: simulate first n unique gene theoretical phenotype using defined function
-    gene1_p1 = cbind(gene1 = 1:n, p1_sample(n, pt_neg, pt_pos, pt_wt, pt_ctrl)) %>%
+    gene1_p1 = cbind(gene1 = 1:n, p1_sample(n, pt_neg, pt_pos, pt_unknown, pt_ctrl)) %>%
       as.data.frame() %>%
       dplyr::mutate(
         # override or keep the original class from p1_sample
