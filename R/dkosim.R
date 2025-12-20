@@ -1,10 +1,11 @@
 # simulation with all 4 intialized gene class: negative, wildtype, non-targeting control, positive
+# parameters' value by default is from systematic run (baseline) except for sample_name and n
 dkosim <- function(sample_name,
-                   coverage, n, n_guide_g, sd_freq0 = 1/3.29,
-                   moi = 0.3, p_gi, sd_gi, p_high, mode="CRISPRn",
-                   pt_neg, pt_pos, pt_wt, pt_ctrl,
-                   mu_neg, sd_neg, mu_pos, sd_pos, sd_wt,
-                   n.bottlenecks, n.iterations = 30, rseed = NULL){
+                   coverage = 100, n, n_guide_g = 3, sd_freq0 = 1/3.29,
+                   moi = 0.3, p_gi = 0.03, sd_gi = 1.5, p_high = 1, mode="CRISPRn-100%Eff",
+                   pt_neg = 0.15, pt_pos = 0.05, pt_wt = 0.75, pt_ctrl = 0.05,
+                   mu_neg = -0.75, sd_neg = 0.1, mu_pos = 0.75, sd_pos = 0.1, sd_wt = 0.25,
+                   n.bottlenecks = 1, n.iterations = 30, rseed = NULL){
 
   # initialize library parameters based on users' input
   n_gene_pairs = n * (n-1) / 2 + n  # number of unique gene pairs (both SKO and DKO)
