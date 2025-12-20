@@ -1,10 +1,18 @@
 # simulation with all 4 intialized gene class: negative, wildtype, non-targeting control, positive
 dkosim <- function(sample_name,
-                   coverage, n, n_guide_g, n_gene_pairs, n_construct, library_size, sd_freq0,
-                   moi, moi_pois, p_gi, sd_gi, p_high, mode,
+                   coverage, n, n_guide_g, sd_freq0 = 1/3.29,
+                   moi = 0.3, p_gi, sd_gi, p_high, mode,
                    pt_neg, pt_pos, pt_wt, pt_ctrl,
                    mu_neg, sd_neg, mu_pos, sd_pos, sd_wt,
-                   bottleneck, n.bottlenecks, n.iterations, resampling){
+                   n.bottlenecks, n.iterations = 30, rseed = NULL){
+
+  # initialize library parameters based on users' input
+  n_gene_pairs = n * (n-1) / 2 + n  # number of unique gene pairs (both SKO and DKO)
+  n_construct = (n*n_guide_g) * ((n-1)*n_guide_g) / 2 + n*n_guide_g  # total number of constructs
+  library_size = n_construct * coverage # number of total cells in the initialized gene-level library
+  moi_pois = dpois(1, moi) # get the number of viral particles delivered per cell during transfection from Poisson(moi) to calculate resampling size
+  bottleneck = 2 * library_size # bottleneck size
+  resampling = round(moi_pois * bottleneck)# determine resampling size based on moi and bottleneck size
 
 # print out initialized parameters for this run
 cat("
@@ -48,6 +56,8 @@ cat("
 # ------------------------------------------------------------
 \n")
 
+# set up seed for this randomization run
+set.seed(888)
 
   # %% [markdown]
   # ## PART 1: Parameters Specifications
@@ -237,11 +247,18 @@ cat("
   # %% [markdown]
   # ## PART 3: Guide-Level Cell Library Initialization
   # Optimization: Wrap up into function
-  initialize_guide_cell_lib0 <- function(rep_name, cell_lib0){
+  initialize_guide_cell_lib0 <- function(rep_name, cell_lib0, rseed = rseed){
     library(dplyr)
     library(purrr)
     library(gtools)
-    set.seed(ifelse(rep_name == "repA", 666, 777))  # Different seed for Rep A & Rep B
+    # set up random seed
+    if (is.null(rseed)) {
+      rseed = 666
+      set.seed(ifelse(rep_name == "repA", 666, rseed + 111))
+    } else {
+      set.seed(ifelse(rep_name == "repA", rseed, rseed + 111))  # Different seed for Rep A & Rep B
+      }
+
     ########### STEP 5: initialize guide1 & guide2 w/ type and efficiency ################################################################
     # initialize guides
     guide1 = cbind(1:(n*n_guide_g), guide_sample(n*n_guide_g, mode, p_high)) %>%
@@ -474,7 +491,7 @@ cat("
   # Guide-level Cell Library
   ## initialize independent guide-level cell library by replicates
   cell_lib_guide00 <- foreach(replicate = c("repA", "repB"), .packages = c("dplyr", "data.table", "truncnorm"), .combine = "list") %dopar% {
-    initialize_guide_cell_lib0(replicate, cell_lib0)
+    initialize_guide_cell_lib0(replicate, cell_lib0, rseed)
   }
   ## extract from the list into separated initialized guide-level cell library
   cell_lib_guide0_A <- cell_lib_guide00[[1]]

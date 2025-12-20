@@ -101,4 +101,26 @@ dkosim(
   resampling = round(moi_pois * bottleneck)# determine resampling size based on moi and bottleneck size
 )
 
-dkosim()
+# using this function to test
+dkosim(sample_name="test",
+       coverage=100,
+       n=120,
+       n_guide_g=3,
+       sd_freq0 = 1/3.29,
+       moi = 0.3,
+       p_gi=0.03,
+       sd_gi=1.5,
+       p_high=1,
+       mode="CRISPRn-100%Eff",
+       pt_neg=0.15,
+       pt_pos=0.05,
+       pt_wt=0.75,
+       pt_ctrl=0.05,
+       mu_neg=-0.75,
+       sd_neg=0.1,
+       mu_pos=0.75,
+       sd_pos=0.1,
+       sd_wt=0.25,
+       n.bottlenecks=1,
+       n.iterations = 30,
+       rseed = NULL)
