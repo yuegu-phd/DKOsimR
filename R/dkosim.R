@@ -1,7 +1,7 @@
 # simulation with all 4 intialized gene class: negative, wildtype, non-targeting control, positive
 dkosim <- function(sample_name,
                    coverage, n, n_guide_g, sd_freq0 = 1/3.29,
-                   moi = 0.3, p_gi, sd_gi, p_high, mode,
+                   moi = 0.3, p_gi, sd_gi, p_high, mode="CRISPRn",
                    pt_neg, pt_pos, pt_wt, pt_ctrl,
                    mu_neg, sd_neg, mu_pos, sd_pos, sd_wt,
                    n.bottlenecks, n.iterations = 30, rseed = NULL){
@@ -57,7 +57,11 @@ cat("
 \n")
 
 # set up seed for this randomization run
-set.seed(888)
+if (is.null(rseed)) {
+  set.seed(888)
+} else {
+  set.seed(rseed)
+}
 
   # %% [markdown]
   # ## PART 1: Parameters Specifications
@@ -253,8 +257,7 @@ set.seed(888)
     library(gtools)
     # set up random seed
     if (is.null(rseed)) {
-      rseed = 666
-      set.seed(ifelse(rep_name == "repA", 666, rseed + 111))
+      set.seed(ifelse(rep_name == "repA", 666, 777))
     } else {
       set.seed(ifelse(rep_name == "repA", rseed, rseed + 111))  # Different seed for Rep A & Rep B
       }
