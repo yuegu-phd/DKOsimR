@@ -76,7 +76,8 @@ dkosim(sample_name="test",
        mu_pos=0.75,
        sd_pos=0.1,
        sd_wt=0.25,
-       n.bottlenecks=1,
+       size.bottleneck = 3,
+       n.bottlenecks= 2,
        n.iterations = 30,
        rseed = 111)
 
@@ -84,3 +85,5 @@ dkosim(sample_name="test",
 dkosim(sample_name="test", n=60)
 
 # test on the lab approximating mode
+dkosim(sample_name="test_lab")
+
