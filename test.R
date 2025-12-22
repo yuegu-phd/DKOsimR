@@ -84,6 +84,6 @@ dkosim(sample_name="test",
 # test on parameters without default values: sample_name, n
 dkosim(sample_name="test", n=60)
 
-# test on the lab approximating mode
-dkosim(sample_name="test_lab")
+# test on the lab approximating mode with default parameter values used to mimic Fong-2024
+dkosim_lab(sample_name="test_lab")
 
