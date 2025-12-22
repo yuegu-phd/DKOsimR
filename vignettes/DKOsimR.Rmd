@@ -39,12 +39,13 @@ knitr::opts_chunk$set(echo = TRUE)
     - use `CRISPRn` if need high-efficient guides draw from distribution
     
 - Gene Class Parameters:  
-*% of theoretical phenotype to each gene class - make sure they add up to 1* 
+  *1. % of theoretical phenotype to each gene class - make sure they add up to 1* 
   - `pt_neg`: % negative
   - `pt_pos`: % positive
   - `pt_wt`: % wild-type
   - `pt_ctrl`: % non-targeting control
-*mean and std. dev. of theoretical phenotype*
+  
+  *2. Mean and std. dev. of theoretical phenotype*  
   - `mu_neg`: mean of negative genes
   - `sd_neg`: std. dev. of negative genes
   - `mu_pos`: mean of positive genes
@@ -57,7 +58,7 @@ knitr::opts_chunk$set(echo = TRUE)
   - `n.iterations`: number of maximum doubling cycles, by default, we assume a maximum of 30 doublings if we didn't encounter bottleneck
   
 - Randomization Parameter:
-  - `rseed`: values used for random number generator - use a same number to control same sets of genes having GI
+  - `rseed`: values used for random number generator - use same number to control same sets of genes having GI
 
 
 
