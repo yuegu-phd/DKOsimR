@@ -86,7 +86,3 @@ dkosim(sample_name="test", n=60)
 
 # test on the lab approximating mode with default parameter values used to mimic Fong-2024
 dkosim_lab(sample_name="test_lab")
-
-# check simulated lab data LFC pattern
-test_lab_data = read.csv("./data//test_lab_repA.csv")
-plot(density(test_lab_data$LFC))
