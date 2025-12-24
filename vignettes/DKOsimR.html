@@ -359,6 +359,76 @@ display: none;
 
 <div id="tutorial-how-to-generate-synthetic-crispr-data-using-dkosimr" class="section level1">
 <h1>Tutorial: How to generate synthetic CRISPR data using DKOsimR?</h1>
+<div id="tunable-paramters" class="section level2">
+<h2>Tunable paramters:</h2>
+<p><strong><em>Abbreviations: %, percentage; GI, genetic interaction;
+std. dev., standard deviation.</em></strong></p>
+<ul>
+<li>Initialized Library Parameters
+<ul>
+<li><code>sample_name</code>: name of the simulation run</li>
+<li><code>coverage</code>: cell representation per guide</li>
+<li><code>n</code>: number of unique single gene</li>
+<li><code>n_guide_g</code>: number of guide per gene</li>
+<li><code>moi</code>: multiplicity of infection - % of cells that are
+transfected by any virus</li>
+<li><code>sd_freq0</code>: dispersion of initial counts
+distribution</li>
+</ul></li>
+<li>GI Parameters:
+<ul>
+<li><code>p_gi</code>: % of genetic interaction presence</li>
+<li><code>sd_gi</code>: std. dev. of re-sampled phenotype with gi
+presence</li>
+</ul></li>
+<li>Guide Parameters:
+<ul>
+<li><code>p_high</code>: % of high-efficacy guides</li>
+<li><code>mode</code>: CRISPR mode:
+<ul>
+<li>use <code>CRISPRn-100%Eff</code> if need 100% efficient guides
+without randomization</li>
+<li>use <code>CRISPRn</code> if need high-efficient guides draw from
+distribution</li>
+</ul></li>
+</ul></li>
+<li>Gene Class Parameters:<br />
+<em>1. % of theoretical phenotype to each gene class - make sure they
+add up to 1</em>
+<ul>
+<li><code>pt_neg</code>: % negative</li>
+<li><code>pt_pos</code>: % positive</li>
+<li><code>pt_wt</code>: % wild-type</li>
+<li><code>pt_ctrl</code>: % non-targeting control</li>
+</ul>
+<em>2. Mean and std. dev. of theoretical phenotype</em>
+<ul>
+<li><code>mu_neg</code>: mean of negative genes</li>
+<li><code>sd_neg</code>: std. dev. of negative genes</li>
+<li><code>mu_pos</code>: mean of positive genes</li>
+<li><code>sd_pos</code>: std. dev. of positive genes</li>
+<li><code>sd_wt</code>: std. dev. of wild-type genes</li>
+</ul></li>
+<li>Bottleneck Parameters:
+<ul>
+<li><code>size.bottleneck</code>: bottleneck size - threshold indicating
+the ceiling of cell growth</li>
+<li><code>n.bottlenecks</code>: number of bottleneck encounters - how
+many times do we encountering bottlenecks?</li>
+<li><code>n.iterations</code>: number of maximum doubling cycles, by
+default, we assume a maximum of 30 doublings if we didn’t encounter
+bottleneck</li>
+</ul></li>
+<li>Randomization Parameter:
+<ul>
+<li><code>rseed</code>: values used for random number generator - use
+same number to control same sets of genes having GI</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="laboratory-data-pattern-approximation" class="section level1">
+<h1>Laboratory Data Pattern Approximation</h1>
 </div>
 
 
