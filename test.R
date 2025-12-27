@@ -79,10 +79,36 @@ dkosim(sample_name="test",
        size.bottleneck = 3,
        n.bottlenecks= 2,
        n.iterations = 30,
-       rseed = 111)
+       rseed = 111,
+       path = "/Users/yuegu/Desktop")
 
 # test on parameters without default values: sample_name, n
 dkosim(sample_name="test", n=60)
+
+# test on the lab approximating mode with all parameters included
+dkosim_lab(sample_name="test_lab",
+           coverage=100,
+           n=60,
+           n_guide_g=3,
+           sd_freq0 = 1/3.29,
+           moi = 0.3,
+           p_gi=0.03,
+           sd_gi=1.5,
+           p_high=1,
+           mode="CRISPRn-100%Eff",
+           pt_neg=0.15,
+           pt_unknown=0.80,
+           pt_ctrl=0.05,
+           mu_neg=-0.75,
+           sd_neg=0.1,
+           sd_unknown=0.25,
+           size.bottleneck = 3,
+           n.bottlenecks= 2,
+           n.iterations = 30,
+           rseed = 111,
+           path = "/Users/yuegu/Desktop")
+
+
 
 # test on the lab approximating mode with default parameter values used to mimic Fong-2024
 dkosim_lab(sample_name="test_lab")

@@ -5,7 +5,13 @@ dkosim <- function(sample_name,
                    moi = 0.3, p_gi = 0.03, sd_gi = 1.5, p_high = 1, mode="CRISPRn-100%Eff",
                    pt_neg = 0.15, pt_pos = 0.05, pt_wt = 0.75, pt_ctrl = 0.05,
                    mu_neg = -0.75, sd_neg = 0.1, mu_pos = 0.75, sd_pos = 0.1, sd_wt = 0.25,
-                   size.bottleneck = 2, n.bottlenecks = 1, n.iterations = 30, rseed = NULL){
+                   size.bottleneck = 2, n.bottlenecks = 1, n.iterations = 30, rseed = NULL,
+                   path = "."){
+
+  # check initialized output path
+  if (!dir.exists(path)) {
+    stop("Base path does not exist: ", path)
+  }
 
   # initialize library parameters based on users' input
   n_gene_pairs = n * (n-1) / 2 + n  # number of unique gene pairs (both SKO and DKO)
@@ -414,12 +420,15 @@ if (is.null(rseed)) {
   # %%
   ########### STEP 8: Sampling by relative frequency of each construct and update the storing output ################
   # Define a function to run Replicates in parallel
-  run_replicate <- function(replicate_name, cell_lib_guide0) {
+  run_replicate <- function(replicate_name, cell_lib_guide0, path) {
     # create and write on a log file to track the iterations and bottleneck encountering
-    log_file <- paste0("./logs/", sample_name, "_", replicate_name, "_log.txt")
-    if (!dir.exists("logs")) {
-      dir.create("logs")
-    }
+    out_log_dir <- file.path(path, "logs", sample_name)
+    dir.create(out_log_dir, recursive = TRUE, showWarnings = FALSE)
+    log_file <- file.path(
+      out_log_dir,
+      paste0(sample_name, "_", replicate_name, "_log.txt")
+    )
+
     write(paste0(Sys.time(), " - ", replicate_name, " started execution\n"),
           file = log_file, append = TRUE)
 
@@ -457,15 +466,20 @@ if (is.null(rseed)) {
     # Normalization, Log Fold Change(LFC) Calculation and Save outputs
     ## adjust pseudo_counts according to the bottleneck number
     pseudo_counts = 5 * 10^(-floor(log10(bottleneck))-1)
-    if (!dir.exists("data")) {
-      dir.create("data")
-    }
+
+    # create output data dir under the user-specified base path
+    out_data_dir <- file.path(path, "data", sample_name)
+    dir.create(out_data_dir, recursive = TRUE, showWarnings = FALSE)
+
     ## stored updated cell library and calculate relative frequency
     cell_lib_guide2 = cell_lib_guide1 %>%
       mutate(counts_guide_t2 = counts_guide_t1,
              rel_freq_guide_t2 = counts_guide_t2 / sum(counts_guide_t2),
              LFC = log2(((rel_freq_guide_t2 + pseudo_counts) / (rel_freq_guide_t0 + pseudo_counts)))) # add pseudocounts to calculate log fold change to avoid infinity
-    write.csv(cell_lib_guide2, paste0("./data/", sample_name, "_", replicate_name, ".csv"))
+
+    # write out data file
+    data_file <- file.path(out_data_dir, paste0(sample_name, "_", replicate_name, ".csv"))
+    write.csv(cell_lib_guide2, data_file, row.names = FALSE)
   }
 
   # ## PART 5: Run Simulations
@@ -516,9 +530,9 @@ if (is.null(rseed)) {
   ## Optimization: Run guide-level simulation for both replicates in parallel
   results <- foreach(replicate = c("repA", "repB"), .packages = c("dplyr", "foreach", "doParallel", "tidyr", "data.table", "extraDistr"), .combine = "c") %dopar% {
     if (replicate == "repA") {
-      run_replicate("repA", cell_lib_guide0_A)
+      run_replicate("repA", cell_lib_guide0_A, path)
     } else {
-      run_replicate("repB", cell_lib_guide0_B)
+      run_replicate("repB", cell_lib_guide0_B, path)
     }
     return(paste(replicate, "completed"))
   }

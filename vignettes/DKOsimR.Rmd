@@ -158,9 +158,8 @@ dkosim(sample_name="test",
 ```
 
 
-
 ## 5. Laboratory Data Pattern Approximation
-
+To utilize the simulation framework in approximating actual laboratory data pattern, `dkosim_lab` was designed
 
 
 ## 6. Applying Genetic Interaction Detection Methods on simulated data
