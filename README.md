@@ -18,6 +18,8 @@ library(DKOsimR)
 vignette(DKOsimR) # see tutorial on how to generate synthetic CRISPR data using DKOsimR
 ```
 
+## Overview of Study Design
+![DKOsim workflow](assets/images/overview.jpg)
 
 ## Example Workflow
 
