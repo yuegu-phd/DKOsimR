@@ -15,7 +15,14 @@ devtools::install(dependencies = TRUE)
 Load the package and explore its tutorial documents in vignette
 ```
 library(DKOsimR)
+devtools::install(build_vignettes = TRUE)
 vignette("DKOsimR") # see tutorial on how to generate synthetic CRISPR data using DKOsimR
+browseVignettes("DKOsimR") # see the source code in tutorial
+```
+
+It might take a few minutes to build vignette. Alternatively, you may view the prebuilt vignette file after installing the package.
+```
+DKOsimR::open_dkosim_vignette_pdf()
 ```
 
 ## Overview of Study Design
