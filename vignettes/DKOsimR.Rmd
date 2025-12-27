@@ -1,7 +1,5 @@
 ---
 title: "DKOsimR Tutorial"
-author:
-date:
 output: pdf_document
 vignette: >
   %\VignetteIndexEntry{DKOsimR Tutorial}
@@ -166,3 +164,8 @@ dkosim(sample_name="test",
 
 
 ## 6. Applying Genetic Interaction Detection Methods on simulated data
+
+
+## Reference
+Gu, Y., Hart, T., Leon-Novelo, L., Shen, J.P.. Double-CRISPR Knockout Simulation (DKOsim): A Monte-Carlo Randomization System to Model Cell Growth Behavior and Infer the Optimal Library Design for Growth-Based Double Knockout Screens. bioRxiv 2025.09.11.675497. DOI: 10.1101/2025.09.11.675497.
+
