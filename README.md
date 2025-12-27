@@ -11,6 +11,17 @@ devtools::install_github("yuegu-phd/DKOsimR")
 devtools::install(dependencies = TRUE)
 ```
 
+## Getting Started
+1. Load the package and explore its tutorial documents in vignette
+```
+library(DKOsimR)
+vignette(DKOsimR) # see tutorial on how to generate synthetic CRISPR data using DKOsimR
+```
+
+
+## Example Workflow
+
+
 ## References
 - Gu, Y., Hart, T., Leon-Novelo, L., Shen, J.P.. Double-CRISPR Knockout Simulation (DKOsim): A Monte-Carlo Randomization System to Model Cell Growth Behavior and Infer the Optimal Library Design for Growth-Based Double Knockout Screens. bioRxiv 2025.09.11.675497. DOI: 10.1101/2025.09.11.675497.
 - Shen, J., Zhao, D., Sasik, R. et al. Combinatorial CRISPR–Cas9 screens for de novo mapping of genetic interactions. Nat Methods 14, 573–576 (2017). DOI: 10.1038/nmeth.4225.
