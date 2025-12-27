@@ -25,3 +25,9 @@ Imports:
     MCMCpack,
     truncnorm,
     xtable
+Suggests:
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
+    
+

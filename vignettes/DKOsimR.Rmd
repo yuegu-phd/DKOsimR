@@ -1,23 +1,40 @@
 ---
-title: "DKOsimR"
-author: "Yue Gu"
-date: "2025-12-22"
-output: 
-  html_document: default
-  pdf_document: default
+title: "DKOsimR Tutorial"
+author:
+date:
+output: pdf_document
+vignette: >
+  %\VignetteIndexEntry{DKOsimR Tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 # use the following command to generate pdf and html files in the same directory of .rmd
 #rmarkdown::render("./vignettes/DKOsimR.Rmd", "html_document", output_dir="./vignettes")
 #rmarkdown::render("./vignettes/DKOsimR.Rmd", "pdf_document", output_dir="./vignettes")
 
 ```
 
+
 # Tutorial: How to generate synthetic CRISPR data using DKOsimR?
-## Tunable paramters:
+
+## 1. Introduction
+This tutorial introduces DKOsimR package for generating synthetic CRISPR double knockout data. It mainly includes:
+
+- Full list of all tunable parameters to initialize the simulation.
+- Descriptions on how users may generate synthetic CRISPR data in two modes: 
+  - default simulation, with 4 gene class: negative, wild-type, non-targeting control, positive
+  - simulation applicable to approximate real lab data, with 3 gene class: negative (essential), unknown, non-targeting control
+
+
+## 2. List of tunable parameters:
+Let's go through the designed parameters in the simulation framework. Below list out all tunable parameters and how it is represented in DKOsimR.  
+
 ***Abbreviations: %, percentage; GI, genetic interaction; std. dev., standard deviation.***
 
 - Initialized Library Parameters
@@ -60,7 +77,9 @@ knitr::opts_chunk$set(echo = TRUE)
 - Randomization Parameter:
   - `rseed`: values used for random number generator - use same number to control same sets of genes having GI
 
+## 3. Running Simulation
 
 
-# Laboratory Data Pattern Approximation
+
+## 4. Laboratory Data Pattern Approximation
 
