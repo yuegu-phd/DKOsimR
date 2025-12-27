@@ -12,7 +12,7 @@ devtools::install(dependencies = TRUE)
 ```
 
 ## Getting Started
-1. Load the package and explore its tutorial documents in vignette
+Load the package and explore its tutorial documents in vignette
 ```
 library(DKOsimR)
 vignette(DKOsimR) # see tutorial on how to generate synthetic CRISPR data using DKOsimR
