@@ -2,9 +2,9 @@
 # special version of dkosim that is applicable in approximating real lab data patterns in synthetic lethal screens for human cancer cell lines
 # default parameters' value is from Simulation (mimicking Fong) except for sample_name
 dkosim_lab <- function(sample_name,
-                       coverage = 10, n = 246, n_guide_g = 3, sd_freq0 = 1/2.56,
+                       coverage = 100, n, n_guide_g = 3, sd_freq0 = 1/2.56,
                        moi = 0.3, p_gi = 0.03, sd_gi = 1.5, p_high = 0.75, mode="CRISPRn",
-                       pt_neg = 64/246, pt_pos = 0, pt_unknown = 178/246, pt_ctrl = 4/246,
+                       pt_neg = 0.15, pt_pos = 0, pt_unknown = 0.8, pt_ctrl = 0.05,
                        mu_neg = -0.03, sd_neg = 0.25, mu_pos = 0, sd_pos = 0, sd_unknown = 0.25,
                        size.bottleneck = 2, n.bottlenecks = 1, n.iterations = 30, rseed = NULL,
                        path = "."){
