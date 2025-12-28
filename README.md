@@ -4,7 +4,8 @@ DKOsimR is an R package for running Double-CRISPR Knockout Simulation (DKOsim). 
 
 ## Installation
 DKOsimR is an open-source R package. To install DKOsimR and all required dependencies via Github, you may use the following commands in R:
-```
+
+```r
 if(!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
 devtools::install_github("yuegu-phd/DKOsimR")
@@ -13,15 +14,17 @@ devtools::install(dependencies = TRUE)
 
 ## Getting Started
 Load the package and explore its tutorial documents in vignette
-```
+
+```r
 library(DKOsimR)
 devtools::install(build_vignettes = TRUE)
 vignette("DKOsimR") # see tutorial on how to generate synthetic CRISPR data using DKOsimR
 browseVignettes("DKOsimR") # see the source code in tutorial
 ```
 
-It might take a few minutes to build vignette. Alternatively, you may view the prebuilt vignette file after installing the package.
-```
+It might take a few minutes to build vignette. Alternatively, you may view the pre-built vignette file after installing the package.
+
+```r
 DKOsimR::open_dkosim_vignette_pdf()
 ```
 
