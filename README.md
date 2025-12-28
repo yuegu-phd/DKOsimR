@@ -29,7 +29,7 @@ DKOsimR::open_dkosim_vignette_pdf()
 ```
 
 ## Overview of Study Design
-The primary components of input, model, and output of DKOsim are described in following diagram.
+Primary components of input, model, and output are described here:
 
 ![DKOsim workflow](assets/images/overview.jpg)
 
