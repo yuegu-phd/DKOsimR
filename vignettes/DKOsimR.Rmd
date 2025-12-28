@@ -9,6 +9,7 @@ vignette: >
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
+  root.dir = here::here(),
   collapse = TRUE,
   comment = "#>"
 )
@@ -18,122 +19,142 @@ knitr::opts_chunk$set(
 
 ```
 
-
 # Tutorial: How to generate synthetic CRISPR data using DKOsimR?
+
 ***Abbreviations: SKO, single knockout; DKO, double knockout; %, percentage; GI, genetic interaction; std. dev., standard deviation.***
 
 ## 1. Introduction
+
 This tutorial introduces DKOsimR package for generating synthetic CRISPR double knockout data. It mainly includes:
 
 - Full list of all tunable parameters to initialize the simulation.
-- Descriptions on how users may generate synthetic CRISPR data in two modes: 
-  - default simulation, with 4 gene class: negative, wild-type, non-targeting control, positive
-  - simulation applicable to approximate real lab data, with 3 gene class: negative (essential), unknown, non-targeting control
-- Examples of applying genetic interaction detection methods on simulated datasets.
+- Descriptions on how users may generate synthetic CRISPR data in two modes:
+    - default simulation, with 4 gene class: negative, wild-type, non-targeting control, positive
+    - simulation applicable to approximate real lab data, with 3 gene class: negative (essential), unknown, non-targeting control
+- Examples of applying Genetic Interaction detection method on simulated datasets
 
 ## 2. Install and Load DKOsimR
+
 Simply install and load the package into your R session with following commands:
-```{r}
+
+```{r setup and load package}
 if(!requireNamespace("devtools", quietly = TRUE))
   install.packages("devtools")
 devtools::install_github("yuegu-phd/DKOsimR", quiet = TRUE)
 library(DKOsimR)
 ```
+
 Make sure all required dependencies are installed using `devtools::install(dependencies = TRUE)`
 
-
-
 ## 3. List of tunable parameters:
-Let's go through the designed parameters in simulation framework. Below list out all tunable parameters and how it is represented in DKOsimR.  
 
-- Initialized Library Parameters
-  - `sample_name`: name of the simulation run
-  - `coverage`: cell representation per guide
-  - `n`: number of unique single gene
-  - `n_guide_g`: number of guide per gene
-  - `moi`: multiplicity of infection - % of cells that are transfected by any virus
-  - `sd_freq0`: dispersion of initial counts distribution
-  
+Let's go through the designed parameters in simulation framework. Below list out all tunable parameters and how it is represented in DKOsimR.
+
+- Initialized Library Parameters:
+
+    - `sample_name`: name of the simulation run
+    - `coverage`: cell representation per guide
+    - `n`: number of unique single gene
+    - `n_guide_g`: number of guide per gene
+    - `moi`: multiplicity of infection - % of cells that are transfected by any virus
+    - `sd_freq0`: dispersion of initial counts distribution
+
 - GI Parameters:
-  - `p_gi`: % of genetic interaction presence
-  - `sd_gi`: std. dev. of re-sampled phenotype with gi presence
-  
+
+    - `p_gi`: % of genetic interaction presence
+    - `sd_gi`: std. dev. of re-sampled phenotype with gi presence
+
 - Guide Parameters:
-  - `p_high`: % of high-efficacy guides
-  - `mode`: CRISPR mode: 
-    - use `CRISPRn-100%Eff` if need 100% efficient guides without randomization
-    - use `CRISPRn` if need high-efficient guides draw from distribution
-    
+
+    - `p_high`: % of high-efficacy guides
+    - `mode`: CRISPR mode:
+        - use `CRISPRn-100%Eff` if need 100% efficient guides without randomization
+        - use `CRISPRn` if need high-efficient guides draw from distribution
+
 - Gene Class Parameters:  
-  *1. % of theoretical phenotype to each gene class - make sure they add up to 1* 
-  - `pt_neg`: % negative
-  - `pt_pos`: % positive
-  - `pt_wt`: % wild-type
-  - `pt_ctrl`: % non-targeting control
-  
-  *2. Mean and std. dev. of theoretical phenotype*  
-  - `mu_neg`: mean of negative genes
-  - `sd_neg`: std. dev. of negative genes
-  - `mu_pos`: mean of positive genes
-  - `sd_pos`: std. dev. of positive genes
-  - `sd_wt`: std. dev. of wild-type genes
-  
-- Bottleneck Parameters:  
-  - `size.bottleneck`: bottleneck size - threshold indicating the ceiling of cell growth
-  - `n.bottlenecks`: number of bottleneck encounters - how many times do we encountering bottlenecks?
-  - `n.iterations`: number of maximum doubling cycles, by default, we assume a maximum of 30 doublings if we didn't encounter bottleneck
-  
+    *1. % of theoretical phenotype to each gene class - make sure they add up to 1*
+
+    - `pt_neg`: % negative
+    - `pt_pos`: % positive
+    - `pt_wt`: % wild-type
+    - `pt_ctrl`: % non-targeting control
+
+    *2. Mean and std. dev. of theoretical phenotype*
+
+    - `mu_neg`: mean of negative genes
+    - `sd_neg`: std. dev. of negative genes
+    - `mu_pos`: mean of positive genes
+    - `sd_pos`: std. dev. of positive genes
+    - `sd_wt`: std. dev. of wild-type genes
+
+- Bottleneck Parameters:
+
+    - `size.bottleneck`: bottleneck size - threshold indicating the ceiling of cell growth
+    - `n.bottlenecks`: number of bottleneck encounters - how many times do we encountering bottlenecks?
+    - `n.iterations`: number of maximum doubling cycles, by default, we assume a maximum of 30 doublings if we didn't encounter bottleneck
+
 - Randomization Parameter:
-  - `rseed`: values used for random number generator - use same number to control same sets of genes having GI
+
+    - `rseed`: values used for random number generator - use same number to control same sets of genes having GI
 
 ## 4. Running Simulation
+
 To generate synthetic double knockout data, by default, values parameters of simulated CRISPR screens are set based on empirical assumptions as follows:
 
-- Initialized Library Parameters
-  - `coverage`: 100
-  - `n_guide_g`: 3
-  - `moi`: 0.3
-  - `sd_freq0`: 1/3.29 (chosen by setting a 10-fold difference between 95th and 5th percentiles of SKO counts distribution)
-  
+- Initialized Library Parameters:
+
+    - `coverage`: 100
+    - `n_guide_g`: 3
+    - `moi`: 0.3
+    - `sd_freq0`: 1/3.29 (chosen by setting a 10-fold difference between 95th and 5th percentiles of SKO counts distribution)
+
 - GI Parameters:
-  - `p_gi`: 0.03
-  - `sd_gi`: 1.5
-  
+
+    - `p_gi`: 0.03
+    - `sd_gi`: 1.5
+
 - Guide Parameters:
-  - `p_high`: 1
-  - `mode`: CRISPR mode: `CRISPRn-100%Eff`
-    
-- Gene Class Parameters:  
-  *1. % of theoretical phenotype to each gene class - make sure they add up to 1* 
-  - `pt_neg`: 0.15
-  - `pt_pos`: 0.05
-  - `pt_wt`: 0.75
-  - `pt_ctrl`: 0.05
-  
-  *2. Mean and std. dev. of theoretical phenotype*  
-  - `mu_neg`: -0.75
-  - `sd_neg`: 0.1
-  - `mu_pos`: 0.75
-  - `sd_pos`: 0.1
-  - `sd_wt`: 0.25
-  
-- Bottleneck Parameters:  
-  - `size.bottleneck`: 2
-  - `n.bottlenecks`: 1
-  - `n.iterations`: 30
-  
+
+    - `p_high`: 1
+    - `mode`: CRISPR mode: `CRISPRn-100%Eff`
+
+- Gene Class Parameters:
+    *1. % of theoretical phenotype to each gene class - make sure they add up to 1*
+
+    - `pt_neg`: 0.15
+    - `pt_pos`: 0.05
+    - `pt_wt`: 0.75
+    - `pt_ctrl`: 0.05
+
+    *2. Mean and std. dev. of theoretical phenotype*
+
+    - `mu_neg`: -0.75
+    - `sd_neg`: 0.1
+    - `mu_pos`: 0.75
+    - `sd_pos`: 0.1
+    - `sd_wt`: 0.25
+
+- Bottleneck Parameters:
+
+    - `size.bottleneck`: 2
+    - `n.bottlenecks`: 1
+    - `n.iterations`: 30
+
 - Randomization Parameter:
-  - `rseed`: NULL
+
+    - `rseed`: NULL
 
 To run simulation by default, simply name your simulation by `sample_name` and specify the number of single genes by `n`. Be cautious that number of genes in each gene class has to be an integer. A quick Simulation Settings Summary would be returned for each run, and the Run Time in the unit of hours would be collected after one successful run. An example running code is
-```{r}
-dkosim(sample_name="test", n=60)
+
+```{r simulation by default}
+dkosim(sample_name="test", n=40)
 ```
 
 Alternatively, you may adjust values to any tunable parameters as desired, but please make sure your input on percentage of each gene class add up to 1 for all classes, and each initialized number of genes is an integer. You may also change the output directory using `path` in the function; by default, the output simulated data and log is under the same directory of current project workspace. The randomization seed can also be specified by `rseed` to ensure same subsets of gene-pairs has GI in multiple run.
 
-An example running code is 
-```{r}
+An example running code is
+
+```{r simulation with tuning parameter}
 dkosim(sample_name="test",
        coverage=10,
        n=60,
@@ -160,55 +181,237 @@ dkosim(sample_name="test",
        path = ".")
 ```
 
-
 ## 5. Laboratory Data Pattern Approximation
-To utilize the simulation framework in approximating actual laboratory data pattern, `dkosim_lab` was designed to include three initialized gene class. You may specify the percentage of essential genes by `pt_neg`, unknown by `pt_unknown`, and non-targeting controls by `pt_ctrl` accordingly. In our designed framework, essential genes is defined by negative genes; unknown genes might compose of genes with theoretical phenotype in either negative, positive, wild-type, or non-targeting control gene class.  
+
+To utilize the simulation framework in approximating actual laboratory data pattern, `dkosim_lab` was designed to include three initialized gene class. You may specify the percentage of essential genes by `pt_neg`, unknown by `pt_unknown`, and non-targeting controls by `pt_ctrl` accordingly. In our designed framework, essential genes is defined by negative genes; unknown genes might compose of genes with theoretical phenotype in either negative, positive, wild-type, or non-targeting control gene class.
 
 By default, `dkosim_lab` run simulation with following parameter
 
 - Initialized Library Parameters
-  - `coverage`: 100
-  - `n_guide_g`: 3
-  - `moi`: 0.3
-  - `sd_freq0`: 1/2.56 (chosen by setting a 10-fold difference between 90th and 10th percentiles of SKO counts distribution)
-  
+
+    - `coverage`: 100
+    - `n_guide_g`: 3
+    - `moi`: 0.3
+    - `sd_freq0`: 1/2.56 (chosen by setting a 10-fold difference between 90th and 10th percentiles of SKO counts distribution)
+
 - GI Parameters:
-  - `p_gi`: 0.03
-  - `sd_gi`: 1.5
-  
+
+    - `p_gi`: 0.03
+    - `sd_gi`: 1.5
+
 - Guide Parameters:
-  - `p_high`: 0.75
-  - `mode`: CRISPR mode: `CRISPRn`
-    
-- Gene Class Parameters:  
-  *1. % of theoretical phenotype to each gene class - make sure they add up to 1* 
-  - `pt_neg`: 0.15
-  - `pt_unknown`: 0.80
-  - `pt_ctrl`: 0.05
-  
-  *2. Mean and std. dev. of theoretical phenotype*  
-  - `mu_neg`: -0.03
-  - `sd_neg`: 0.25
-  - `sd_unknown`: 0.25
-  
-- Bottleneck Parameters:  
-  - `size.bottleneck`: 2
-  - `n.bottlenecks`: 1
-  - `n.iterations`: 30
-  
+
+    - `p_high`: 0.75
+    - `mode`: CRISPR mode: `CRISPRn`
+
+- Gene Class Parameters:\
+    *1. % of theoretical phenotype to each gene class - make sure they add up to 1*
+
+    - `pt_neg`: 0.15
+    - `pt_unknown`: 0.80
+    - `pt_ctrl`: 0.05
+
+    *2. Mean and std. dev. of theoretical phenotype*
+
+    - `mu_neg`: -0.03
+    - `sd_neg`: 0.25
+    - `sd_unknown`: 0.25
+
+- Bottleneck Parameters:
+
+    - `size.bottleneck`: 2
+    - `n.bottlenecks`: 1
+    - `n.iterations`: 30
+
 - Randomization Parameter:
-  - `rseed`: NULL
-  
+
+    - `rseed`: NULL
+
 An example running code is
-```{r}
+
+```{r simulation to approximate lab with default parameters}
 dkosim_lab(sample_name="test_lab", n=20)
 ```
 
 Alternatively, you may adjust values to any tunable parameters as desired, or using the parameters described in the full article to approximate actual lab data pattern in double CRISPR screens.
 
-## 6. Applying Genetic Interaction Detection Methods on simulated data
+## 6. Applying Genetic Interaction Detection Methods on simulated data  
+
+Here, we show how we may apply dLFC (Dede et al., 2020) to calculate GI on simulated data, as example to analyze the simulation output.  
+
+```{r apply dlfc}
+knitr::opts_knit$set(root.dir = getwd())
+# read example simulated data
+sample_name = "example_data"
+pseudo_counts = 5e-07
+repA_path <- here::here("data", paste0(sample_name, "_repA.csv"))
+repB_path <- here::here("data", paste0(sample_name, "_repB.csv"))
+
+# each simulation is containing two replicates A and B, and we take average of the LFC for analysis
+cell_lib_guide2_A = read.csv(repA_path) %>% 
+  dplyr::select(-X)
+
+cell_lib_guide2_B = read.csv(repB_path) %>% 
+  dplyr::select(-X) %>% 
+  dplyr::select(guide_id, counts_guide_t0, 
+                counts_guide_t1, counts_guide_t2, 
+                rel_freq_guide_t0, rel_freq_guide_t2, LFC)
+
+cell_lib_guide2 = merge(cell_lib_guide2_A, cell_lib_guide2_B, by = "guide_id") %>% 
+  dplyr::rename(counts_guide_t0_1 = counts_guide_t0.x,
+                counts_guide_t0_2 = counts_guide_t0.y,
+                counts_guide_t1_1 = counts_guide_t1.x,
+                counts_guide_t1_2 = counts_guide_t1.y,
+                counts_guide_t2_1 = counts_guide_t2.x,
+                counts_guide_t2_2 = counts_guide_t2.y,
+                rel_freq_guide_t0_1 = rel_freq_guide_t0.x,
+                rel_freq_guide_t0_2 = rel_freq_guide_t0.y,
+                rel_freq_guide_t2_1 = rel_freq_guide_t2.x,
+                rel_freq_guide_t2_2 = rel_freq_guide_t2.y,
+                LFC_t2_1 = LFC.x,
+                LFC_t2_2 = LFC.y) %>% 
+  mutate(guide1_type = ifelse(guide1_type == 1, "high", "low"),
+         guide2_type = ifelse(guide2_type == 1, "high", "low"),
+         construct_type = ifelse(is.na(gene2_behavior), gene1_behavior,
+                                 paste0(gene1_behavior, " + ", gene2_behavior)),
+         LFC_t2_1 = log2(((rel_freq_guide_t2_1 + pseudo_counts) / 
+                            (rel_freq_guide_t0_1 + pseudo_counts))),
+         LFC_t2_2 = log2(((rel_freq_guide_t2_2 + pseudo_counts) / 
+                            (rel_freq_guide_t0_2 + pseudo_counts))))%>% 
+  mutate(LFC = (LFC_t2_1 + LFC_t2_2)/2) # aggregate the LFC between 2 replicates by averaging
+
+
+# read the simulated data and prepare sample name
+sim_data = cell_lib_guide2 %>%
+  mutate(construct_type = ifelse(KO_type == "SKO", "SKO",
+                                 ifelse(gene1_behavior == "Non-Targeting Control" 
+                                        | gene2_behavior == "Non-Targeting Control", "SKO", "DKO" )))
+
+nc_gene = unique(as.character(filter(sim_data, gene1_behavior == "Non-Targeting Control")$gene1))
+
+# calculate single mutant/knockout fitness
+gene_SMF = sim_data %>% 
+  filter(construct_type == "SKO", gene1_behavior != "Non-Targeting Control") %>% 
+  group_by(gene1) %>% 
+  dplyr::summarise(SMF = mean(LFC))
+# calculate mean LFC for gene pairs that don't contain control
+gene_LFC = sim_data %>% 
+  filter(construct_type == "DKO") %>% 
+  group_by(gene_pair_id) %>% 
+  dplyr::summarise(LFC_mean = mean(LFC))
+# calculate dLFC = LFC_mean - (SMF1 + SMF2)
+sim_data_dLFC = left_join(sim_data, gene_SMF, by = "gene1") %>% 
+  dplyr::rename(gene1_SMF = SMF) %>% 
+  left_join(gene_SMF, by = c("gene2"="gene1")) %>% 
+  dplyr::rename(gene2_SMF = SMF) %>% 
+  left_join(gene_LFC, by = "gene_pair_id") %>% 
+  mutate(gene1_SMF = ifelse(is.na(gene1_SMF), 0, gene1_SMF),
+         gene2_SMF = ifelse(is.na(gene2_SMF), 0, gene2_SMF),
+         LFC_mean = ifelse(construct_type == "SKO",
+                           ifelse(gene1_SMF == 0, gene2_SMF, gene1_SMF), LFC_mean)) %>% 
+  mutate(dLFC = LFC_mean - (gene1_SMF+gene2_SMF))
+
+# add data frame for the non-control group
+control = sim_data_dLFC %>% filter(gene1 %in% nc_gene | gene2 %in% nc_gene)
+sim_dLFC_noncontrol = sim_data_dLFC %>% anti_join(control, by = "gene1_gene2_id")
+# add data frame for the non-interacting group
+control0 = sim_data_dLFC %>% filter(interaction_gene == 0)
+sim_dLFC_noncontrol0 = sim_data_dLFC %>% anti_join(control0, by = "gene1_gene2_id")
+
+# compute correlation and p-values
+cor_test_all <- cor.test(sim_data_dLFC$interaction_gene, 
+                         sim_data_dLFC$dLFC, method = "pearson")
+cor_test_noncontrol <- cor.test(sim_dLFC_noncontrol$interaction_gene, 
+                                sim_dLFC_noncontrol$dLFC, method = "pearson")
+cor_test_noncontrol0 <- cor.test(sim_dLFC_noncontrol0$interaction_gene, 
+                                 sim_dLFC_noncontrol0$dLFC, method = "pearson")
+# show correlation value
+print(cor_test_all)
+print(cor_test_noncontrol)
+print(cor_test_noncontrol0)
+```
+
+Visualization on scatterplot to the calculated GI in the example
+```{r visualization of dlfc, echo=FALSE}
+library(ggplot2)
+library(ggtext)
+
+# define a function to format p-values if p-values are extremely small
+format_p <- function(pval) {
+  if (is.na(pval)) return("NA")
+  if (pval < 1e-16) {
+    return("< 1e-16")
+  } else {
+    return(formatC(pval, format = "e", digits = 2))
+  }
+}
+
+# plot the scatterplot
+xlim = c(-8,8)
+ylim = c(-20,20)
+
+theme_text = theme(
+  plot.title = element_markdown(size = 8, face = "bold"),   # Title size
+  axis.title.x = element_text(size = 10),  # X-axis title
+  axis.title.y = element_text(size = 10),  # Y-axis title
+  axis.text.x = element_text(size = 10),   # X-axis text
+  axis.text.y = element_text(size = 10),   # Y-axis text
+  legend.title = element_text(size = 10),  # Legend title
+  legend.text = element_text(size = 10),   # Legend text
+  strip.text = element_text(size = 15)     # Facet labels
+)
+scatterplot_dlfc = ggplot(sim_data_dLFC, aes(x = interaction_gene, y = dLFC)) +
+  geom_point(alpha = 0.7, color = "black") +
+  geom_point(data = control0, aes(x = interaction_gene, y = dLFC), 
+             size = 3, shape = 17, color = "blue", fill = "yellow", stroke = 1.5) +
+  geom_point(data = control, aes(x = interaction_gene, y = dLFC), 
+             size = 3, shape = 17, color = "#f76d84", fill = "yellow", stroke = 1.5) +
+  # Regression line for all data
+  geom_smooth(method = "lm", col = "black", se = FALSE, linetype = "solid") + 
+  # Regression line for non-control data
+  geom_smooth(data = sim_dLFC_noncontrol, aes(x = interaction_gene, y = dLFC), 
+              method = "lm", col = "#f76d84", se = FALSE, linetype = "dashed") + 
+  # Regression line for non-zero genetic interactions data
+  geom_smooth(data = sim_dLFC_noncontrol0, aes(x = interaction_gene, y = dLFC), 
+              method = "lm", col = "blue", se = FALSE, linetype = "dashed") + 
+  ggtitle(paste0(
+  "Scatter Plot for dLFC vs. Simulated GI:<br>",
+  "Correlation r = ", round(cor_test_all$estimate, 3), 
+  ", *p* ", format_p(cor_test_all$p.value), "<br>",
+  "Correlation r (w/o non-targeting  controls) = <span style='color:red;'>", round(cor_test_noncontrol$estimate, 3),
+  "</span>, *p* ", format_p(cor_test_noncontrol$p.value), "<br>",
+  "Correlation r (w/o non-interacting  gene pairs) = <span style='color:#0404a0;'>", round(cor_test_noncontrol0$estimate, 3), 
+  "</span>, *p* ", format_p(cor_test_noncontrol0$p.value))) +
+  labs(color = "Gene-gene Interaction Type") +
+  guides(color = guide_legend(override.aes = list(size = 5))) +
+  ylim(ylim[1],ylim[2])+
+  xlim(xlim[1],xlim[2])+
+  theme_minimal() +
+  xlab("Simulated Genetic Interaction") +
+  ylab("Delta Log Fold Change (dLFC)") +
+  # Add annotation label for control points
+  annotate("text", x = xlim[1], 
+           y = ylim[2]-3, 
+           label = "PINK: Data w/ gene pairs containing Non-Targeting Control", 
+           color = "#f85470", size = 3, hjust = 0, fontface = "bold") +
+  # Add annotation label for non-interacting points
+  annotate("text", x = xlim[1], 
+           y = ylim[2]-1.5, 
+           label = "BLUE: Data w/ non-interacting gene pairs", 
+           color = "blue", size = 3, hjust = 0, fontface = "bold")  +
+  theme_text
+
+# show the plot
+options(repr.plot.width = 8, repr.plot.height = 10)
+scatterplot_dlfc
+```
+
 
 
 ## Reference
+
 Gu, Y., Hart, T., Leon-Novelo, L., Shen, J.P.. Double-CRISPR Knockout Simulation (DKOsim): A Monte-Carlo Randomization System to Model Cell Growth Behavior and Infer the Optimal Library Design for Growth-Based Double Knockout Screens. bioRxiv 2025.09.11.675497. DOI: 10.1101/2025.09.11.675497.
+
+Dede, M., McLaughlin, M., Kim, E., & Hart, T. (2020). Multiplex enCas12a screens detect functional buffering among paralogs otherwise masked in monogenic Cas9 knockout screens. Genome biology, 21(1), 262. DOI: 10.1186/s13059-020-02173-2
+
 

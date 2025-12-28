@@ -34,18 +34,18 @@ Primary components of input, model, and output are described here:
 ![DKOsim workflow](assets/images/overview.jpg)
 
 ## Example Workflow
-1. After loading DKOsimR, to run a simulation with default parameters, you may simply use
+After loading DKOsimR, to run a simulation with default parameters, you may simply use
 
 ```r
-dkosim(dkosim(sample_name="test", n=60)) # adjust sample_name and n to name run and initialize number of genes
+dkosim(dkosim(sample_name="test", n=40)) # adjust sample_name and n to name run and initialize number of genes
 ```
 
-  or in lab approximating mode
+or in lab approximating mode
 ```r
-dkosim_lab(dkosim(sample_name="test_lab", n=60))
+dkosim_lab(dkosim(sample_name="test_lab", n=40))
 ```
 
-2. You may adjust all tunable parameters as desired in both mode. For example,
+You may adjust all tunable parameters as desired in both mode. For example,
 
 ```r
 dkosim_lab(sample_name="test_lab",

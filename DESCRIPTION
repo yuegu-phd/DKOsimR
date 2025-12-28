@@ -27,7 +27,9 @@ Imports:
     xtable
 Suggests:
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2,
+    ggtext
 VignetteBuilder: knitr
     
 

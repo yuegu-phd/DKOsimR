@@ -26,3 +26,183 @@
 
 2025-12-28 12:11:34.763573-repB- Iteration:5
 2025-12-28 12:11:34.76374-repB- completed execution
+2025-12-28 14:13:09.21047 - repB started execution
+
+2025-12-28 14:13:14.616652-repB- Iteration:1
+2025-12-28 14:13:23.725245-repB- Iteration:2
+2025-12-28 14:13:23.725674 - Bottleneck encountered: 1
+
+2025-12-28 14:13:26.153456-repB- Iteration:3
+2025-12-28 14:13:26.153644-repB- completed execution
+2025-12-28 14:13:42.220811 - repB started execution
+
+2025-12-28 14:13:42.498995-repB- Iteration:1
+2025-12-28 14:13:42.916233-repB- Iteration:2
+2025-12-28 14:13:42.916685 - Bottleneck encountered: 1
+
+2025-12-28 14:13:43.110907-repB- Iteration:3
+2025-12-28 14:13:43.544228-repB- Iteration:4
+2025-12-28 14:13:43.54458 - Bottleneck encountered: 2
+
+2025-12-28 14:13:43.730327-repB- Iteration:5
+2025-12-28 14:13:43.730555-repB- completed execution
+2025-12-28 15:13:02.760201 - repB started execution
+
+2025-12-28 15:13:08.42813-repB- Iteration:1
+2025-12-28 15:13:17.895658-repB- Iteration:2
+2025-12-28 15:13:17.896302 - Bottleneck encountered: 1
+
+2025-12-28 15:13:20.401793-repB- Iteration:3
+2025-12-28 15:13:20.402049-repB- completed execution
+2025-12-28 15:13:36.708686 - repB started execution
+
+2025-12-28 15:13:36.988111-repB- Iteration:1
+2025-12-28 15:13:37.377122-repB- Iteration:2
+2025-12-28 15:13:37.377453 - Bottleneck encountered: 1
+
+2025-12-28 15:13:37.558392-repB- Iteration:3
+2025-12-28 15:13:37.999191-repB- Iteration:4
+2025-12-28 15:13:37.99968 - Bottleneck encountered: 2
+
+2025-12-28 15:13:38.193743-repB- Iteration:5
+2025-12-28 15:13:38.193975-repB- completed execution
+2025-12-28 15:21:40.325899 - repB started execution
+
+2025-12-28 15:21:46.220152-repB- Iteration:1
+2025-12-28 15:21:55.896219-repB- Iteration:2
+2025-12-28 15:21:55.896768 - Bottleneck encountered: 1
+
+2025-12-28 15:21:58.525057-repB- Iteration:3
+2025-12-28 15:21:58.525273-repB- completed execution
+2025-12-28 15:22:14.610409 - repB started execution
+
+2025-12-28 15:22:14.887927-repB- Iteration:1
+2025-12-28 15:22:15.315041-repB- Iteration:2
+2025-12-28 15:22:15.315416 - Bottleneck encountered: 1
+
+2025-12-28 15:22:15.507062-repB- Iteration:3
+2025-12-28 15:22:15.96414-repB- Iteration:4
+2025-12-28 15:22:15.964529 - Bottleneck encountered: 2
+
+2025-12-28 15:22:16.15928-repB- Iteration:5
+2025-12-28 15:22:16.159532-repB- completed execution
+2025-12-28 15:25:57.210605 - repB started execution
+
+2025-12-28 15:26:02.917218-repB- Iteration:1
+2025-12-28 15:26:13.008059-repB- Iteration:2
+2025-12-28 15:26:13.008464 - Bottleneck encountered: 1
+
+2025-12-28 15:26:15.566655-repB- Iteration:3
+2025-12-28 15:26:15.566874-repB- completed execution
+2025-12-28 15:26:31.623327 - repB started execution
+
+2025-12-28 15:26:31.921836-repB- Iteration:1
+2025-12-28 15:26:32.33549-repB- Iteration:2
+2025-12-28 15:26:32.335835 - Bottleneck encountered: 1
+
+2025-12-28 15:26:32.525287-repB- Iteration:3
+2025-12-28 15:26:32.956018-repB- Iteration:4
+2025-12-28 15:26:32.956429 - Bottleneck encountered: 2
+
+2025-12-28 15:26:33.143672-repB- Iteration:5
+2025-12-28 15:26:33.143871-repB- completed execution
+2025-12-28 15:44:01.031917 - repB started execution
+
+2025-12-28 15:44:06.486007-repB- Iteration:1
+2025-12-28 15:44:15.561867-repB- Iteration:2
+2025-12-28 15:44:15.562393 - Bottleneck encountered: 1
+
+2025-12-28 15:44:18.042872-repB- Iteration:3
+2025-12-28 15:44:18.043179-repB- completed execution
+2025-12-28 15:44:33.978963 - repB started execution
+
+2025-12-28 15:44:34.263173-repB- Iteration:1
+2025-12-28 15:44:34.678243-repB- Iteration:2
+2025-12-28 15:44:34.678576 - Bottleneck encountered: 1
+
+2025-12-28 15:44:34.863981-repB- Iteration:3
+2025-12-28 15:44:35.284938-repB- Iteration:4
+2025-12-28 15:44:35.28535 - Bottleneck encountered: 2
+
+2025-12-28 15:44:35.46962-repB- Iteration:5
+2025-12-28 15:44:35.469791-repB- completed execution
+2025-12-28 15:48:47.106505 - repB started execution
+
+2025-12-28 15:48:52.584103-repB- Iteration:1
+2025-12-28 15:49:01.803885-repB- Iteration:2
+2025-12-28 15:49:01.804353 - Bottleneck encountered: 1
+
+2025-12-28 15:49:04.251472-repB- Iteration:3
+2025-12-28 15:49:04.251774-repB- completed execution
+2025-12-28 15:49:20.18549 - repB started execution
+
+2025-12-28 15:49:20.465862-repB- Iteration:1
+2025-12-28 15:49:20.88037-repB- Iteration:2
+2025-12-28 15:49:20.880638 - Bottleneck encountered: 1
+
+2025-12-28 15:49:21.066473-repB- Iteration:3
+2025-12-28 15:49:21.495796-repB- Iteration:4
+2025-12-28 15:49:21.496117 - Bottleneck encountered: 2
+
+2025-12-28 15:49:21.678798-repB- Iteration:5
+2025-12-28 15:49:21.678996-repB- completed execution
+2025-12-28 15:53:34.647344 - repB started execution
+
+2025-12-28 15:53:40.090565-repB- Iteration:1
+2025-12-28 15:53:49.21103-repB- Iteration:2
+2025-12-28 15:53:49.21145 - Bottleneck encountered: 1
+
+2025-12-28 15:53:51.649244-repB- Iteration:3
+2025-12-28 15:53:51.64946-repB- completed execution
+2025-12-28 15:54:07.570593 - repB started execution
+
+2025-12-28 15:54:07.853246-repB- Iteration:1
+2025-12-28 15:54:08.257527-repB- Iteration:2
+2025-12-28 15:54:08.257869 - Bottleneck encountered: 1
+
+2025-12-28 15:54:08.4449-repB- Iteration:3
+2025-12-28 15:54:08.86477-repB- Iteration:4
+2025-12-28 15:54:08.865153 - Bottleneck encountered: 2
+
+2025-12-28 15:54:09.051488-repB- Iteration:5
+2025-12-28 15:54:09.051728-repB- completed execution
+2025-12-28 15:56:09.011963 - repB started execution
+
+2025-12-28 15:56:14.493595-repB- Iteration:1
+2025-12-28 15:56:23.86912-repB- Iteration:2
+2025-12-28 15:56:23.869645 - Bottleneck encountered: 1
+
+2025-12-28 15:56:26.33683-repB- Iteration:3
+2025-12-28 15:56:26.337098-repB- completed execution
+2025-12-28 15:56:42.311636 - repB started execution
+
+2025-12-28 15:56:42.593412-repB- Iteration:1
+2025-12-28 15:56:43.000264-repB- Iteration:2
+2025-12-28 15:56:43.000656 - Bottleneck encountered: 1
+
+2025-12-28 15:56:43.18425-repB- Iteration:3
+2025-12-28 15:56:43.616707-repB- Iteration:4
+2025-12-28 15:56:43.616992 - Bottleneck encountered: 2
+
+2025-12-28 15:56:43.805993-repB- Iteration:5
+2025-12-28 15:56:43.806173-repB- completed execution
+2025-12-28 15:58:56.728025 - repB started execution
+
+2025-12-28 15:58:59.195574-repB- Iteration:1
+2025-12-28 15:59:03.317885-repB- Iteration:2
+2025-12-28 15:59:03.31829 - Bottleneck encountered: 1
+
+2025-12-28 15:59:04.403063-repB- Iteration:3
+2025-12-28 15:59:04.403327-repB- completed execution
+2025-12-28 15:59:17.533803 - repB started execution
+
+2025-12-28 15:59:17.665918-repB- Iteration:1
+2025-12-28 15:59:17.892803-repB- Iteration:2
+2025-12-28 15:59:17.893108 - Bottleneck encountered: 1
+
+2025-12-28 15:59:17.983306-repB- Iteration:3
+2025-12-28 15:59:18.180403-repB- Iteration:4
+2025-12-28 15:59:18.180748 - Bottleneck encountered: 2
+
+2025-12-28 15:59:18.271555-repB- Iteration:5
+2025-12-28 15:59:18.271835-repB- completed execution

@@ -83,7 +83,7 @@ dkosim(sample_name="test",
        path = ".")
 
 # test on parameters without default values: sample_name, n
-dkosim(sample_name="test", n=60)
+dkosim(sample_name="test", n=40)
 
 # test on the lab approximating mode with all parameters included
 dkosim_lab(sample_name="test_lab",

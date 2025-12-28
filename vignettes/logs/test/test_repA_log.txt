@@ -26,3 +26,183 @@
 
 2025-12-28 12:11:34.76023-repA- Iteration:5
 2025-12-28 12:11:34.760474-repA- completed execution
+2025-12-28 14:13:09.21046 - repA started execution
+
+2025-12-28 14:13:14.605087-repA- Iteration:1
+2025-12-28 14:13:23.665117-repA- Iteration:2
+2025-12-28 14:13:23.665598 - Bottleneck encountered: 1
+
+2025-12-28 14:13:26.104421-repA- Iteration:3
+2025-12-28 14:13:26.1047-repA- completed execution
+2025-12-28 14:13:42.220777 - repA started execution
+
+2025-12-28 14:13:42.499015-repA- Iteration:1
+2025-12-28 14:13:42.924833-repA- Iteration:2
+2025-12-28 14:13:42.925136 - Bottleneck encountered: 1
+
+2025-12-28 14:13:43.118712-repA- Iteration:3
+2025-12-28 14:13:43.555089-repA- Iteration:4
+2025-12-28 14:13:43.555472 - Bottleneck encountered: 2
+
+2025-12-28 14:13:43.74586-repA- Iteration:5
+2025-12-28 14:13:43.746071-repA- completed execution
+2025-12-28 15:13:02.760197 - repA started execution
+
+2025-12-28 15:13:08.447301-repA- Iteration:1
+2025-12-28 15:13:17.914166-repA- Iteration:2
+2025-12-28 15:13:17.914628 - Bottleneck encountered: 1
+
+2025-12-28 15:13:20.426643-repA- Iteration:3
+2025-12-28 15:13:20.42686-repA- completed execution
+2025-12-28 15:13:36.708676 - repA started execution
+
+2025-12-28 15:13:36.98864-repA- Iteration:1
+2025-12-28 15:13:37.382774-repA- Iteration:2
+2025-12-28 15:13:37.383094 - Bottleneck encountered: 1
+
+2025-12-28 15:13:37.563958-repA- Iteration:3
+2025-12-28 15:13:38.008621-repA- Iteration:4
+2025-12-28 15:13:38.008998 - Bottleneck encountered: 2
+
+2025-12-28 15:13:38.198072-repA- Iteration:5
+2025-12-28 15:13:38.198242-repA- completed execution
+2025-12-28 15:21:40.325895 - repA started execution
+
+2025-12-28 15:21:46.190115-repA- Iteration:1
+2025-12-28 15:21:55.883547-repA- Iteration:2
+2025-12-28 15:21:55.883926 - Bottleneck encountered: 1
+
+2025-12-28 15:21:58.494753-repA- Iteration:3
+2025-12-28 15:21:58.495013-repA- completed execution
+2025-12-28 15:22:14.610396 - repA started execution
+
+2025-12-28 15:22:14.885856-repA- Iteration:1
+2025-12-28 15:22:15.303713-repA- Iteration:2
+2025-12-28 15:22:15.304106 - Bottleneck encountered: 1
+
+2025-12-28 15:22:15.494399-repA- Iteration:3
+2025-12-28 15:22:15.944382-repA- Iteration:4
+2025-12-28 15:22:15.944754 - Bottleneck encountered: 2
+
+2025-12-28 15:22:16.145235-repA- Iteration:5
+2025-12-28 15:22:16.14549-repA- completed execution
+2025-12-28 15:25:57.210605 - repA started execution
+
+2025-12-28 15:26:02.888052-repA- Iteration:1
+2025-12-28 15:26:12.980896-repA- Iteration:2
+2025-12-28 15:26:12.981308 - Bottleneck encountered: 1
+
+2025-12-28 15:26:15.547835-repA- Iteration:3
+2025-12-28 15:26:15.548078-repA- completed execution
+2025-12-28 15:26:31.62332 - repA started execution
+
+2025-12-28 15:26:31.913789-repA- Iteration:1
+2025-12-28 15:26:32.325643-repA- Iteration:2
+2025-12-28 15:26:32.325982 - Bottleneck encountered: 1
+
+2025-12-28 15:26:32.511461-repA- Iteration:3
+2025-12-28 15:26:32.941155-repA- Iteration:4
+2025-12-28 15:26:32.941507 - Bottleneck encountered: 2
+
+2025-12-28 15:26:33.125279-repA- Iteration:5
+2025-12-28 15:26:33.125495-repA- completed execution
+2025-12-28 15:44:01.031914 - repA started execution
+
+2025-12-28 15:44:06.491653-repA- Iteration:1
+2025-12-28 15:44:15.590105-repA- Iteration:2
+2025-12-28 15:44:15.590549 - Bottleneck encountered: 1
+
+2025-12-28 15:44:18.067294-repA- Iteration:3
+2025-12-28 15:44:18.067536-repA- completed execution
+2025-12-28 15:44:33.978962 - repA started execution
+
+2025-12-28 15:44:34.259487-repA- Iteration:1
+2025-12-28 15:44:34.665417-repA- Iteration:2
+2025-12-28 15:44:34.665788 - Bottleneck encountered: 1
+
+2025-12-28 15:44:34.848252-repA- Iteration:3
+2025-12-28 15:44:35.266407-repA- Iteration:4
+2025-12-28 15:44:35.266796 - Bottleneck encountered: 2
+
+2025-12-28 15:44:35.456639-repA- Iteration:5
+2025-12-28 15:44:35.456825-repA- completed execution
+2025-12-28 15:48:47.106508 - repA started execution
+
+2025-12-28 15:48:52.543993-repA- Iteration:1
+2025-12-28 15:49:01.775346-repA- Iteration:2
+2025-12-28 15:49:01.775812 - Bottleneck encountered: 1
+
+2025-12-28 15:49:04.254511-repA- Iteration:3
+2025-12-28 15:49:04.254704-repA- completed execution
+2025-12-28 15:49:20.185464 - repA started execution
+
+2025-12-28 15:49:20.460447-repA- Iteration:1
+2025-12-28 15:49:20.876827-repA- Iteration:2
+2025-12-28 15:49:20.877165 - Bottleneck encountered: 1
+
+2025-12-28 15:49:21.071169-repA- Iteration:3
+2025-12-28 15:49:21.493086-repA- Iteration:4
+2025-12-28 15:49:21.493489 - Bottleneck encountered: 2
+
+2025-12-28 15:49:21.682423-repA- Iteration:5
+2025-12-28 15:49:21.682578-repA- completed execution
+2025-12-28 15:53:34.647344 - repA started execution
+
+2025-12-28 15:53:40.098566-repA- Iteration:1
+2025-12-28 15:53:49.187358-repA- Iteration:2
+2025-12-28 15:53:49.187869 - Bottleneck encountered: 1
+
+2025-12-28 15:53:51.623598-repA- Iteration:3
+2025-12-28 15:53:51.624-repA- completed execution
+2025-12-28 15:54:07.570576 - repA started execution
+
+2025-12-28 15:54:07.853246-repA- Iteration:1
+2025-12-28 15:54:08.257728-repA- Iteration:2
+2025-12-28 15:54:08.257976 - Bottleneck encountered: 1
+
+2025-12-28 15:54:08.444144-repA- Iteration:3
+2025-12-28 15:54:08.87814-repA- Iteration:4
+2025-12-28 15:54:08.87855 - Bottleneck encountered: 2
+
+2025-12-28 15:54:09.066479-repA- Iteration:5
+2025-12-28 15:54:09.0667-repA- completed execution
+2025-12-28 15:56:09.012027 - repA started execution
+
+2025-12-28 15:56:14.521936-repA- Iteration:1
+2025-12-28 15:56:23.90238-repA- Iteration:2
+2025-12-28 15:56:23.902911 - Bottleneck encountered: 1
+
+2025-12-28 15:56:26.411127-repA- Iteration:3
+2025-12-28 15:56:26.411365-repA- completed execution
+2025-12-28 15:56:42.314301 - repA started execution
+
+2025-12-28 15:56:42.592808-repA- Iteration:1
+2025-12-28 15:56:42.995221-repA- Iteration:2
+2025-12-28 15:56:42.995585 - Bottleneck encountered: 1
+
+2025-12-28 15:56:43.184981-repA- Iteration:3
+2025-12-28 15:56:43.614939-repA- Iteration:4
+2025-12-28 15:56:43.615324 - Bottleneck encountered: 2
+
+2025-12-28 15:56:43.802567-repA- Iteration:5
+2025-12-28 15:56:43.80281-repA- completed execution
+2025-12-28 15:58:56.728025 - repA started execution
+
+2025-12-28 15:58:59.196016-repA- Iteration:1
+2025-12-28 15:59:03.324146-repA- Iteration:2
+2025-12-28 15:59:03.324532 - Bottleneck encountered: 1
+
+2025-12-28 15:59:04.404495-repA- Iteration:3
+2025-12-28 15:59:04.404683-repA- completed execution
+2025-12-28 15:59:17.533802 - repA started execution
+
+2025-12-28 15:59:17.662628-repA- Iteration:1
+2025-12-28 15:59:17.891412-repA- Iteration:2
+2025-12-28 15:59:17.891795 - Bottleneck encountered: 1
+
+2025-12-28 15:59:17.989096-repA- Iteration:3
+2025-12-28 15:59:18.197989-repA- Iteration:4
+2025-12-28 15:59:18.198334 - Bottleneck encountered: 2
+
+2025-12-28 15:59:18.289894-repA- Iteration:5
+2025-12-28 15:59:18.290061-repA- completed execution
