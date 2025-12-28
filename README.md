@@ -29,18 +29,20 @@ DKOsimR::open_dkosim_vignette_pdf()
 ```
 
 ## Overview of Study Design
+The primary components of input, model, and output of DKOsim are described in following diagram.
+
 ![DKOsim workflow](assets/images/overview.jpg)
 
 ## Example Workflow
 After loading DKOsimR, to run a simulation with default parameters, you may simply use
 
 ```r
-dkosim(dkosim(sample_name="test", n=60)) # adjust sample_name to name the simulation, and n to change number of genes included
+dkosim(dkosim(sample_name="test", n=60)) # adjust sample_name and n to name run and initialize number of genes
 ```
 
 or in lab approximating mode
 ```r
-dkosim_lab(dkosim(sample_name="test_lab", n=60)) # adjust sample_name to name the simulation, and n to change number of genes included
+dkosim_lab(dkosim(sample_name="test_lab", n=60))
 ```
 
 You may adjust all tunable parameters as desired in both mode. For example,
@@ -69,7 +71,7 @@ dkosim_lab(sample_name="test_lab",
            path = ".")
 ```
 
-Check the reference article on more details.
+Check vignettes and reference article on more details.
 
 
 ## References

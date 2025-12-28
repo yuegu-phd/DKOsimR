@@ -80,7 +80,7 @@ dkosim(sample_name="test",
        n.bottlenecks= 2,
        n.iterations = 30,
        rseed = 111,
-       path = "/Users/yuegu/Desktop")
+       path = ".")
 
 # test on parameters without default values: sample_name, n
 dkosim(sample_name="test", n=60)
@@ -106,7 +106,7 @@ dkosim_lab(sample_name="test_lab",
            n.bottlenecks= 2,
            n.iterations = 30,
            rseed = 111,
-           path = "/Users/yuegu/Desktop")
+           path = ".")
 
 
 
