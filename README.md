@@ -32,6 +32,44 @@ DKOsimR::open_dkosim_vignette_pdf()
 ![DKOsim workflow](assets/images/overview.jpg)
 
 ## Example Workflow
+After loading DKOsimR, to run a simulation with default parameters, you may simply use
+
+```r
+dkosim(dkosim(sample_name="test", n=60)) # adjust sample_name to name the simulation, and n to change number of genes included
+```
+
+or in lab approximating mode
+```r
+dkosim_lab(dkosim(sample_name="test_lab", n=60)) # adjust sample_name to name the simulation, and n to change number of genes included
+```
+
+You may adjust all tunable parameters as desired in both mode. For example,
+
+```r
+dkosim_lab(sample_name="test_lab",
+           coverage=100,
+           n=60,
+           n_guide_g=3,
+           sd_freq0 = 1/3.29,
+           moi = 0.3,
+           p_gi=0.03,
+           sd_gi=1.5,
+           p_high=1,
+           mode="CRISPRn-100%Eff",
+           pt_neg=0.15,
+           pt_unknown=0.80,
+           pt_ctrl=0.05,
+           mu_neg=-0.75,
+           sd_neg=0.1,
+           sd_unknown=0.25,
+           size.bottleneck = 3,
+           n.bottlenecks= 2,
+           n.iterations = 30,
+           rseed = 111,
+           path = ".")
+```
+
+Check the reference article on more details.
 
 
 ## References
