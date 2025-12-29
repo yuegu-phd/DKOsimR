@@ -24,6 +24,48 @@ dkosim_lab <- function(sample_name,
 
 
   # print out initialized parameters for this run
+  if (mode == "CRISPRn-100%Eff"){
+    cat("
+# ------------------------------------------------------------
+# Simulation Settings Summary:
+# ------------------------------------------------------------
+# Sample Name:", sample_name, "
+# Number of Genes:", n, "
+# Cell Library Size (Initial):", library_size, "
+# Coverage:", coverage,"x
+# Number of Single Knockout(SKO):", n, "
+# Number of Double Knockout(DKO):", n_gene_pairs - n, "
+# Number of Guides per Gene:", n_guide_g, "
+# Number of Constructs:", n_construct, "
+# Variance of Initialized Counts:", round(sd_freq0^2,2), "
+
+# Genetic Interactions (GI):
+## Proportion of GI(%):", p_gi * 100, "
+## Number of Interacting Gene Pairs:", round(p_gi * (n_gene_pairs-n)), "
+## Variance of re-sampled phenotypes w/ GI:", sd_gi^2, "
+
+# Proportion of Each Initialized Gene Class (by theoretical phenotypes):
+## Negative/Essential(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ",-1,-0.025)
+## Unknown(%):", pt_unknown * 100, "~ TN(0,", sd_unknown^2, ",-0.5, 0.5)
+## Non-Targeting Control(%):", pt_ctrl * 100, "~ Delta(0)
+
+# Proportion of Guides (by efficacy):
+## High-efficacy(%):", p_high * 100, "~ 1
+## Low-efficacy(%):", (1-p_high) * 100, "~ TN(0.05, 0.0049, 0, 0.6)
+
+# Multiplicity of Infection (MOI):", moi , "
+# Percentage of viral particles delivered in cells during transfection(%):", round(dpois(1, lambda = moi) * 100, 2) , "~ Poisson(",moi,")
+# Resampling Size based on MOI (Passage Size):", resampling, "
+# Bottleneck Size (", size.bottleneck, "x Initial Guide-Level Library Size):", bottleneck, "
+# Number of Bottleneck Encounters (Number of Passages):", n.bottlenecks, "
+# Total Available Doublings:", n.iterations, "
+# Number of Replicates:", 2, "
+# Pseudo-count:", 5 * 10^(-floor(log10(bottleneck))-1), "
+
+# ------------------------------------------------------------
+\n")
+  }
+  else if (mode == "CRISPRn"){
     cat("
 # ------------------------------------------------------------
 # Simulation Settings Summary:
@@ -63,6 +105,8 @@ dkosim_lab <- function(sample_name,
 
 # ------------------------------------------------------------
 \n")
+
+  }
 
 
   # %% [markdown]
@@ -413,7 +457,7 @@ dkosim_lab <- function(sample_name,
   # Define a function to run Replicates in parallel
   run_replicate <- function(replicate_name, cell_lib_guide0) {
     # create and write on a log file to track the iterations and bottleneck encountering
-    out_log_dir <- file.path(path, "logs", sample_name)
+    out_log_dir <- file.path(path, "logs")
     dir.create(out_log_dir, recursive = TRUE, showWarnings = FALSE)
     log_file <- file.path(
       out_log_dir,
@@ -459,7 +503,7 @@ dkosim_lab <- function(sample_name,
     pseudo_counts = 5 * 10^(-floor(log10(bottleneck))-1)
 
     # create output data dir under the user-specified base path
-    out_data_dir <- file.path(path, "data", sample_name)
+    out_data_dir <- file.path(path, "data")
     dir.create(out_data_dir, recursive = TRUE, showWarnings = FALSE)
 
     ## stored updated cell library and calculate relative frequency

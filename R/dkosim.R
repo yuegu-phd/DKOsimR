@@ -22,9 +22,8 @@ dkosim <- function(sample_name,
   resampling = round(moi_pois * bottleneck)# determine resampling size based on moi and bottleneck size
 
 # print out initialized parameters for this run
-
   if (mode == "CRISPRn-100%Eff"){
-cat("
+  cat("
 # ------------------------------------------------------------
 # Simulation Settings Summary:
 # ------------------------------------------------------------
@@ -469,7 +468,7 @@ if (is.null(rseed)) {
   # Define a function to run Replicates in parallel
   run_replicate <- function(replicate_name, cell_lib_guide0, path) {
     # create and write on a log file to track the iterations and bottleneck encountering
-    out_log_dir <- file.path(path, "logs", sample_name)
+    out_log_dir <- file.path(path, "logs")
     dir.create(out_log_dir, recursive = TRUE, showWarnings = FALSE)
     log_file <- file.path(
       out_log_dir,
@@ -515,7 +514,7 @@ if (is.null(rseed)) {
     pseudo_counts = 5 * 10^(-floor(log10(bottleneck))-1)
 
     # create output data dir under the user-specified base path
-    out_data_dir <- file.path(path, "data", sample_name)
+    out_data_dir <- file.path(path, "data")
     dir.create(out_data_dir, recursive = TRUE, showWarnings = FALSE)
 
     ## stored updated cell library and calculate relative frequency
