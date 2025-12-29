@@ -110,5 +110,7 @@ dkosim_lab(sample_name="test_lab",
 
 
 
-# test on the lab approximating mode with default parameter values used to mimic Fong-2024
-dkosim_lab(sample_name="test_lab")
+# test on the lab approximating mode with default parameter
+dkosim_lab(sample_name="test_lab", n = 20)
+dkosim_lab(sample_name="test_lab", n = 20, mode = "CRISPRn-100%Eff")
+
