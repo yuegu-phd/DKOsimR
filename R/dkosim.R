@@ -22,6 +22,8 @@ dkosim <- function(sample_name,
   resampling = round(moi_pois * bottleneck)# determine resampling size based on moi and bottleneck size
 
 # print out initialized parameters for this run
+
+  if (mode == "CRISPRn-100%Eff"){
 cat("
 # ------------------------------------------------------------
 # Simulation Settings Summary:
@@ -62,6 +64,51 @@ cat("
 
 # ------------------------------------------------------------
 \n")
+    }
+  else if (mode == "CRISPRn"){
+      cat("
+# ------------------------------------------------------------
+# Simulation Settings Summary:
+# ------------------------------------------------------------
+# Sample Name:", sample_name, "
+# Number of Genes:", n, "
+# Cell Library Size (Initial):", library_size, "
+# Coverage:", coverage,"x
+# Number of Single Knockout(SKO):", n, "
+# Number of Double Knockout(DKO):", n_gene_pairs - n, "
+# Number of Guides per Gene:", n_guide_g, "
+# Number of Constructs:", n_construct, "
+# Variance of Initialized Counts:", round(sd_freq0^2,2), "
+
+# Genetic Interactions (GI):
+## Proportion of GI(%):", p_gi * 100, "
+## Number of Interacting Gene Pairs:", round(p_gi * (n_gene_pairs-n)), "
+## Variance of re-sampled phenotypes w/ GI:", sd_gi^2, "
+
+# Proportion of Each Initialized Gene Class (by theoretical phenotypes):
+## Negative(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ",-1,-0.025)
+## Positive(%):", pt_pos * 100, "~ TN(", mu_pos, "," ,sd_pos^2, ",0.025, 1)
+## Wild-Type(%):", pt_wt * 100, "~ TN(0,", sd_wt^2, ",-0.025, 0.025)
+## Non-Targeting Control(%):", pt_ctrl * 100, "~ Delta(0)
+
+# Proportion of Guides (by efficacy):
+## High-efficacy(%):", p_high * 100, "~ TN(0.9, 0.1, 0.6, 1)
+## Low-efficacy(%):", (1-p_high) * 100, "~ TN(0.05, 0.0049, 0, 1)
+
+# Multiplicity of Infection (MOI):", moi , "
+# Percentage of viral particles delivered in cells during transfection(%):", round(dpois(1, lambda = moi) * 100, 2) , "~ Poisson(",moi,")
+# Resampling Size based on MOI (Passage Size):", resampling, "
+# Bottleneck Size (", size.bottleneck, "x Initial Guide-Level Library Size):", bottleneck, "
+# Number of Bottleneck Encounters (Number of Passages):", n.bottlenecks, "
+# Total Available Doublings:", n.iterations, "
+# Number of Replicates:", 2, "
+# Pseudo-count:", 5 * 10^(-floor(log10(bottleneck))-1), "
+
+# ------------------------------------------------------------
+\n")
+  }
+
+
 
 # set up seed for this randomization run
 if (is.null(rseed)) {
