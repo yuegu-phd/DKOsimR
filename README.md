@@ -32,6 +32,7 @@ DKOsimR::open_dkosim_vignette_pdf()
 Primary components of input, model, and output are described here:
 
 ![DKOsim workflow](assets/images/overview.jpg)
+Created in BioRender. Gu, Y. (2026) https://BioRender.com/fek72q6
 
 ## Example Workflow
 After loading DKOsimR, to run a simulation with default parameters, you may simply use
