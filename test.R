@@ -83,7 +83,7 @@ dkosim(sample_name="test",
        path = ".")
 
 # test on parameters without default values: sample_name, n
-dkosim(sample_name="test", n=40, mode="CRISPRn")
+dkosim(sample_name="test", n=10, mode="CRISPRn", cores_free = 5)
 
 # test on the lab approximating mode with all parameters included
 dkosim_lab(sample_name="test_lab",

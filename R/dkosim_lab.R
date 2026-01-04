@@ -7,7 +7,7 @@ dkosim_lab <- function(sample_name,
                        pt_neg = 0.15, pt_pos = 0, pt_unknown = 0.8, pt_ctrl = 0.05,
                        mu_neg = -0.03, sd_neg = 0.25, mu_pos = 0, sd_pos = 0, sd_unknown = 0.25,
                        size.bottleneck = 2, n.bottlenecks = 1, n.iterations = 30, rseed = NULL,
-                       path = "."){
+                       path = ".", cores_free = 2){
 
   # check initialized output path
   if (!dir.exists(path)) {
@@ -531,11 +531,16 @@ dkosim_lab <- function(sample_name,
   library(dplyr)
   library(data.table)
 
-  ## Use all available cores
+  ## check available cores, and leave two free cores by default to avoid hard coding
   num_cores <- parallel::detectCores()
-  cl <- makeCluster(num_cores)
-  registerDoParallel(cl)
-  start_time <- proc.time()
+  if (cores_free >= num_cores){
+    return("Requesting more free cores than all avaiable cores, set a smaller number of free cores.")
+  }
+  else{
+    cl <- makeCluster(num_cores - cores_free)
+    registerDoParallel(cl)
+    start_time <- proc.time()
+  }
 
   # Gene-level Cell Library
   ##initialize shared gene-level cell library, same across replicates
@@ -579,7 +584,7 @@ dkosim_lab <- function(sample_name,
   end_time <- proc.time()
   elapsed_time <- end_time - start_time; elapsed_time
   # check used cores and running time
-  print(paste("number of cores", num_cores))
+  print(paste("number of cores used: ", num_cores))
   print(paste("Run Time (hrs): ", elapsed_time["elapsed"]/3600))
 
 }
