@@ -7,7 +7,7 @@ dkosim_lab <- function(sample_name,
                        pt_neg = 0.15, pt_pos = 0, pt_unknown = 0.8, pt_ctrl = 0.05,
                        mu_neg = -0.03, sd_neg = 0.25, mu_pos = 0, sd_pos = 0, sd_unknown = 0.25,
                        size.bottleneck = 2, n.bottlenecks = 1, n.iterations = 30, rseed = NULL,
-                       path = ".", cores_free = 2){
+                       path = ".", cores_free = 1){
 
   # check initialized output path
   if (!dir.exists(path)) {

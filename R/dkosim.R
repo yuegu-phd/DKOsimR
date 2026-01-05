@@ -6,7 +6,7 @@ dkosim <- function(sample_name,
                    pt_neg = 0.15, pt_pos = 0.05, pt_wt = 0.75, pt_ctrl = 0.05,
                    mu_neg = -0.75, sd_neg = 0.1, mu_pos = 0.75, sd_pos = 0.1, sd_wt = 0.25,
                    size.bottleneck = 2, n.bottlenecks = 1, n.iterations = 30, rseed = NULL,
-                   path = ".", cores_free = 2){
+                   path = ".", cores_free = 1){
 
   # check initialized output path
   if (!dir.exists(path)) {
@@ -542,7 +542,7 @@ if (is.null(rseed)) {
   library(dplyr)
   library(data.table)
 
-  ## check available cores, and leave two free cores by default to avoid hard coding
+  ## check available cores, and leave one free core by default to avoid hard coding
   num_cores <- parallel::detectCores()
   if (cores_free >= num_cores){
     return("Requesting more free cores than all avaiable cores, set a smaller number of free cores.")
