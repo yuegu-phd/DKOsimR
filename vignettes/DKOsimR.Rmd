@@ -64,14 +64,7 @@ Let's go through the designed parameters in simulation framework. Below list out
 
     - `p_gi`: % of GI presence
     - `sd_gi`: std. dev. of re-sampled phenotype with GI presence
-
-- Guide Parameters:
-
-    - `p_high`: % of high-efficacy guides
-    - `mode`: CRISPR mode:
-        - use `CRISPRn-100%Eff` if need 100% efficient guides without randomization
-        - use `CRISPRn` if need high-efficient guides drawn from distribution
-
+    
 - Gene Class Parameters:
 
     *1. % of theoretical phenotype to each gene class - make sure they add up to 1*
@@ -88,6 +81,19 @@ Let's go through the designed parameters in simulation framework. Below list out
     - `mu_pos`: mean of positive genes
     - `sd_pos`: std. dev. of positive genes
     - `sd_wt`: std. dev. of wild-type genes
+
+- Guide Parameters:
+
+    - `p_high`: % of high-efficacy guides
+    - `mode`: CRISPR mode:
+        - use `CRISPRn-100%Eff` if need 100% efficient guides without randomization
+        - use `CRISPRn` if need high-efficient guides drawn from distribution
+    - `mu_high`: mean of high-efficacy guides
+    - `sd_high`: std. dev of high-efficacy guides
+    - `mu_low`: mean of low-efficacy guides
+    - `sd_low`: std. dev of high-efficacy guides
+    
+
 
 - Bottleneck Parameters:
 
@@ -119,12 +125,7 @@ To generate synthetic double knockout data, **by default, the simulated datasets
 
     - `p_gi`: 0.03
     - `sd_gi`: 1.5
-
-- Guide Parameters:
-
-    - `p_high`: 1
-    - `mode`: CRISPR mode: `CRISPRn-100%Eff`
-
+    
 - Gene Class Parameters:
 
     *1. % of theoretical phenotype to each gene class - make sure they add up to 1*
@@ -141,6 +142,15 @@ To generate synthetic double knockout data, **by default, the simulated datasets
     - `mu_pos`: 0.75
     - `sd_pos`: 0.1
     - `sd_wt`: 0.25
+
+- Guide Parameters:
+
+    - `p_high`: 1
+    - `mode`: CRISPR mode: `CRISPRn-100%Eff`
+    - `mu_high`: 0.9
+    - `sd_high`: 0.1
+    - `mu_low`: 0.05
+    - `sd_low`: 0.07
 
 - Bottleneck Parameters:
 
@@ -177,8 +187,6 @@ dkosim(sample_name="test",
        moi = 0.3,
        p_gi=0.03,
        sd_gi=1.5,
-       p_high=1,
-       mode="CRISPRn-100%Eff",
        pt_neg=0.15,
        pt_pos=0.05,
        pt_wt=0.75,
@@ -188,6 +196,12 @@ dkosim(sample_name="test",
        mu_pos=0.75,
        sd_pos=0.1,
        sd_wt=0.25,
+       p_high=0.8,
+       mode="CRISPRn",
+       mu_high=0.9,
+       sd_high=0.1,
+       mu_low=0.05,
+       sd_low=0.07,
        size.bottleneck = 3,
        n.bottlenecks= 2,
        n.iterations = 30,
@@ -214,11 +228,6 @@ By default, `dkosim_lab` run simulation with following parameter
     - `p_gi`: 0.03
     - `sd_gi`: 1.5
 
-- Guide Parameters:
-
-    - `p_high`: 0.75
-    - `mode`: CRISPR mode: `CRISPRn`
-
 - Gene Class Parameters:
 
     *1. % of theoretical phenotype to each gene class - make sure they add up to 1*
@@ -232,6 +241,15 @@ By default, `dkosim_lab` run simulation with following parameter
     - `mu_neg`: -0.03
     - `sd_neg`: 0.25
     - `sd_unknown`: 0.25
+    
+- Guide Parameters:
+
+    - `p_high`: 0.75
+    - `mode`: CRISPR mode: `CRISPRn`
+    - `mu_high`: 0.9
+    - `sd_high`: 0.1
+    - `mu_low`: 0.05
+    - `sd_low`: 0.07
 
 - Bottleneck Parameters:
 
@@ -447,13 +465,6 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
     - `p_gi`: 0.03 by default, chosen by empirical assumption on the presence of GI in real lab that are close to 3%. Can be tuned higher if want higher presence of GIs. 
     - `sd_gi`: 1.5 by default and would be sufficient for most cases. This directly affects GI magnitude, and can be tuned lower for smaller GI magnitude.
 
-- Guide Parameters:
-
-    - `p_high`: 1 by default, set from 0.75 to 0.8 to resemble real lab data.
-    - `mode`: CRISPR mode:
-        - use `CRISPRn-100%Eff` if need 100% efficient guides without randomization (theoretical case), ensure p_high is 1 when using this mode
-        - use `CRISPRn` if need high-efficient guides drawn from distribution (practical case for actual lab setting)
-
 - Gene Class Parameters:
 
     *1. % of theoretical phenotype to each gene class - make sure they add up to 1*
@@ -470,6 +481,17 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
     - `mu_pos`: set to values from 0.01 to 0.8 as desired
     - `sd_pos`: set to values from 0.1 to 0.5 as desired
     - `sd_wt`: set to values from 0.1 to 0.5 as desired
+    
+- Guide Parameters:
+
+    - `p_high`: 1 by default, set from 0.75 to 0.8 to resemble real lab data.
+    - `mode`: CRISPR mode:
+        - use `CRISPRn-100%Eff` if need 100% efficient guides without randomization (theoretical case), ensure p_high is 1 when using this mode (default mode)
+        - use `CRISPRn` if need high-efficient guides drawn from distribution (practical case for actual lab setting)
+    - `mu_high`: keep unchanged with default value of 0.9.
+    - `sd_high`: keep unchanged with default value of 0.1.
+    - `mu_low`: keep unchanged with default value of 0.05.
+    - `sd_low`: keep unchanged with default value 0.07.
 
 - Bottleneck Parameters:
 
@@ -502,12 +524,7 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
 
     - `p_gi`: 0.03 (default)
     - `sd_gi`: 1.5 (default)
-
-- Guide Parameters:
-
-    - `p_high`: 0.75
-    - `mode`: CRISPRn
-
+    
 - Gene Class Parameters:
 
     *1. % of theoretical phenotype to each gene class
@@ -521,6 +538,15 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
     - `mu_neg`: -0.03
     - `sd_neg`: 0.25
     - `sd_unknown`: 0.2
+
+- Guide Parameters:
+
+    - `p_high`: 0.75 (default)
+    - `mode`: CRISPRn (default)
+    - `mu_high`: 0.9 (default)
+    - `sd_high`: 0.1 (default)
+    - `mu_low`: 0.05 (default)
+    - `sd_low`: 0.07 (default)
 
 - Bottleneck Parameters:
 
@@ -547,14 +573,18 @@ dkosim_lab(sample_name="DKOsimR_246x3x3_1000x_mFong_run1",
            moi = 0.3,
            p_gi=0.03,
            sd_gi=1.5,
-           p_high=0.75,
-           mode="CRISPRn",
            pt_neg=64/246,
            pt_unknown=178/246,
            pt_ctrl=4/246,
            mu_neg=-0.03,
            sd_neg=0.25,
            sd_unknown=0.2,
+           p_high=0.75,
+           mode="CRISPRn",
+           mu_high=0.9,
+           sd_high=0.1,
+           mu_low=0.05,
+           sd_low=0.07,
            size.bottleneck = 2,
            n.bottlenecks= 1,
            n.iterations = 30)
