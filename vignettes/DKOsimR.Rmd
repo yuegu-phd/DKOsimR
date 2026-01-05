@@ -98,6 +98,11 @@ Let's go through the designed parameters in simulation framework. Below list out
 - Randomization Parameter:
 
     - `rseed`: values used for random number generator - use same number to control same sets of genes having GI
+    
+- Miscellaneous:
+
+    - `path`: path to directory to save outputs of data and logs from simulation
+    - `cores_free`: number of cores that are left to be free in parallel computing
 
 ## 4. Running Simulation
 
@@ -146,8 +151,14 @@ To generate synthetic double knockout data, **by default, the simulated datasets
 - Randomization Parameter:
 
     - `rseed`: NULL
+    
+- Miscellaneous:
 
-To run simulation by default, simply name your simulation by `sample_name` and specify the number of single genes by `n`. **Be cautious that number of genes in each gene class should be an integer.** A quick Simulation Settings Summary would be returned for each run, and the Run Time in the unit of hours would be collected after one successful run. An example running code is
+    - `path`: current working directory
+    - `cores_free`: 1
+
+
+To run simulation by default, simply name your simulation by `sample_name` and specify the number of single genes by `n`. **Be cautious that number of genes in each gene class should be an integer to optimize simulation run.** A quick Simulation Settings Summary would be returned for each run. Additionally, number of cores used for parallel computing, Run Time in unit of hours would be collected after one successful run. An example running code is
 
 ```{r simulation by default}
 dkosim(sample_name="test", n=40)
@@ -181,7 +192,8 @@ dkosim(sample_name="test",
        n.bottlenecks= 2,
        n.iterations = 30,
        rseed = 111,
-       path = ".")
+       path = ".",
+       cores_free = 2)
 ```
 
 ## 5. Laboratory Data Pattern Approximation
@@ -231,6 +243,11 @@ By default, `dkosim_lab` run simulation with following parameter
 
     - `rseed`: NULL
 
+- Miscellaneous:
+
+    - `path`: current working directory
+    - `cores_free`: 1
+
 An example running code is
 
 ```{r simulation to approximate lab with default parameters}
@@ -241,7 +258,7 @@ Alternatively, you may adjust values to any tunable parameters as desired, or us
 
 ## 6. Applying GI Detection Methods on simulated data  
 
-Here, we show how we may apply dLFC (Dede et al., 2020) to calculate GI on simulated data, as example to analyze the simulation output.  
+Here, we show how we may apply dLFC (Dede et al., 2020) to calculate GI on simulated data, as an example to analyze the simulation output.  
 
 ```{r apply dlfc}
 knitr::opts_knit$set(root.dir = getwd())
@@ -335,7 +352,7 @@ print(cor_test_noncontrol)
 print(cor_test_noncontrol0)
 ```
 
-Visualization on scatterplot to the calculated GI in the example
+Visualization on scatterplot to the calculated GI in this example
 ```{r visualization of dlfc, echo=FALSE}
 library(ggplot2)
 library(ggtext)
@@ -463,6 +480,11 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
 - Randomization Parameter:
 
     - `rseed`: use a same number to control same sets of genes having GI
+
+- Miscellaneous:
+
+    - `path`: keep default or change to path to your project folder
+    - `cores_free`: keep default for shortest running time, but increase the number to avoid hard coding issues
 
   
 To approximate patterns from actual laboratory DKO screens. We suggest using `dkosim_lab()` by inputting the same number of genes in each gene class as the laboratory settings. A case example in mimicking Fong-2024 A549 (Fong et al., 2024) has been described in the second major results section of DKOsim article, check it for more detailed information.
