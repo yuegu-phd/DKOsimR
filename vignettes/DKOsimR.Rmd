@@ -487,8 +487,78 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
     - `cores_free`: keep default for shortest running time, but increase the number to avoid hard coding issues
 
   
-To approximate patterns from actual laboratory DKO screens. We suggest using `dkosim_lab()` by inputting the same number of genes in each gene class as the laboratory settings. A case example in mimicking Fong-2024 A549 (Fong et al., 2024) has been described in the second major results section of DKOsim article, check it for more detailed information.
+To approximate patterns from actual laboratory DKO screens. We suggest using `dkosim_lab()` by inputting the same number of genes in each gene class as the laboratory settings. A case example in mimicking Fong-2024 A549 (Fong et al., 2024) has been described in the second major results section of DKOsim article. Here, we provide a list of input parameters for DKOsim (mimicking Fong-2024 A549). Empirically, it took around 2 hours to finish running this approximation with 14 cores enabled for parallel computing.
 
+- Initialized Library Parameters:
+
+    - `sample_name`: DKOsimR_246x3x3_1000x_run1  
+    - `coverage`: 1000
+    - `n`: 246
+    - `n_guide_g`: 3 (default)
+    - `moi`: 0.3 (default)
+    - `sd_freq0`: 1/2.56
+
+- GI Parameters:
+
+    - `p_gi`: 0.03 (default)
+    - `sd_gi`: 1.5 (default)
+
+- Guide Parameters:
+
+    - `p_high`: 0.75
+    - `mode`: CRISPRn
+
+- Gene Class Parameters:
+
+    *1. % of theoretical phenotype to each gene class
+    
+    - `pt_neg`: 64/246    
+    - `pt_unknown`: 178/246
+    - `pt_ctrl`: 4/246
+
+    *2. Mean and std. dev. of theoretical phenotype*
+
+    - `mu_neg`: -0.03
+    - `sd_neg`: 0.25
+    - `sd_unknown`: 0.2
+
+- Bottleneck Parameters:
+
+    - `size.bottleneck`: 2 (default)
+    - `n.bottlenecks`: 1 (default)
+    - `n.iterations`: 30 (default)
+
+- Randomization Parameter:
+
+    - `rseed`: NULL (default)
+
+- Miscellaneous:
+
+    - `path`: NULL (default)
+    - `cores_free`: NULL (default)
+
+Codes for the mimicking are provided below, but not run in this tutorial, check full results in the reference article.
+```{r, eval=FALSE}
+dkosim_lab(sample_name="DKOsimR_246x3x3_1000x_run1",
+           coverage=1000,
+           n=246,
+           n_guide_g=3,
+           sd_freq0 = 1/2.56,
+           moi = 0.3,
+           p_gi=0.03,
+           sd_gi=1.5,
+           p_high=0.75,
+           mode="CRISPRn",
+           pt_neg=64/246,
+           pt_unknown=178/246,
+           pt_ctrl=4/246,
+           mu_neg=-0.03,
+           sd_neg=0.25,
+           sd_unknown=0.2,
+           size.bottleneck = 2,
+           n.bottlenecks= 1,
+           n.iterations = 30)
+```
 
 
 ## Reference
