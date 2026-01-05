@@ -3,9 +3,11 @@
 # default parameters' value is from Simulation (mimicking Fong) except for sample_name
 dkosim_lab <- function(sample_name,
                        coverage = 100, n, n_guide_g = 3, sd_freq0 = 1/2.56,
-                       moi = 0.3, p_gi = 0.03, sd_gi = 1.5, p_high = 0.75, mode="CRISPRn",
+                       moi = 0.3, p_gi = 0.03, sd_gi = 1.5,
                        pt_neg = 0.15, pt_pos = 0, pt_unknown = 0.8, pt_ctrl = 0.05,
                        mu_neg = -0.03, sd_neg = 0.25, mu_pos = 0, sd_pos = 0, sd_unknown = 0.25,
+                       p_high = 0.75, mode="CRISPRn",
+                       mu_high = 0.9, sd_high = 0.1, mu_low = 0.05, sd_low = 0.07,
                        size.bottleneck = 2, n.bottlenecks = 1, n.iterations = 30, rseed = NULL,
                        path = ".", cores_free = 1){
 
@@ -45,13 +47,13 @@ dkosim_lab <- function(sample_name,
 ## Variance of re-sampled phenotypes w/ GI:", sd_gi^2, "
 
 # Proportion of Each Initialized Gene Class (by theoretical phenotypes):
-## Negative/Essential(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ",-1,-0.025)
-## Unknown(%):", pt_unknown * 100, "~ TN(0,", sd_unknown^2, ",-0.5, 0.5)
+## Negative/Essential(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ", -1, -0.025)
+## Unknown(%):", pt_unknown * 100, "~ TN(0,", sd_unknown^2, ", -0.5, 0.5)
 ## Non-Targeting Control(%):", pt_ctrl * 100, "~ Delta(0)
 
 # Proportion of Guides (by efficacy):
 ## High-efficacy(%):", p_high * 100, "~ 1
-## Low-efficacy(%):", (1-p_high) * 100, "~ TN(0.05, 0.0049, 0, 0.6)
+## Low-efficacy(%):", (1-p_high) * 100, "~ TN(", mu_low, "," , sd_low^2, ", 0, 1)
 
 # Multiplicity of Infection (MOI):", moi , "
 # Percentage of viral particles delivered in cells during transfection(%):", round(dpois(1, lambda = moi) * 100, 2) , "~ Poisson(",moi,")
@@ -86,13 +88,13 @@ dkosim_lab <- function(sample_name,
 ## Variance of re-sampled phenotypes w/ GI:", sd_gi^2, "
 
 # Proportion of Each Initialized Gene Class (by theoretical phenotypes):
-## Negative/Essential(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ",-1,-0.025)
-## Unknown(%):", pt_unknown * 100, "~ TN(0,", sd_unknown^2, ",-0.5, 0.5)
+## Negative/Essential(%):", pt_neg * 100, "~ TN(", mu_neg, "," , sd_neg^2, ", -1, -0.025)
+## Unknown(%):", pt_unknown * 100, "~ TN(0,", sd_unknown^2, ", -0.5, 0.5)
 ## Non-Targeting Control(%):", pt_ctrl * 100, "~ Delta(0)
 
 # Proportion of Guides (by efficacy):
-## High-efficacy(%):", p_high * 100, "~ TN(0.9, 0.1, 0.6, 1)
-## Low-efficacy(%):", (1-p_high) * 100, "~ TN(0.05, 0.0049, 0, 0.6)
+## High-efficacy(%):", p_high * 100, "~ TN(", mu_high, "," , sd_high^2, ", 0.6, 1)
+## Low-efficacy(%):", (1-p_high) * 100, "~ TN(", mu_low, "," , sd_low^2, ", 0, 0.6)
 
 # Multiplicity of Infection (MOI):", moi , "
 # Percentage of viral particles delivered in cells during transfection(%):", round(dpois(1, lambda = moi) * 100, 2) , "~ Poisson(",moi,")
@@ -189,14 +191,14 @@ dkosim_lab <- function(sample_name,
     if (mode == "CRISPRn") {
       guide_eff <- ifelse(
         guide_type,
-        truncnorm::rtruncnorm(n, a = 0.6, b = 1, mean = 0.9, sd = 0.1),
-        truncnorm::rtruncnorm(n, a = 0, b = 0.6, mean = 0.05, sd = 0.07)
+        truncnorm::rtruncnorm(n, a = 0.6, b = 1, mean = mu_high, sd = sd_high),
+        truncnorm::rtruncnorm(n, a = 0, b = 0.6, mean = mu_low, sd = sd_low)
       )
     } else if (mode == "CRISPRn-100%Eff") {
       guide_eff <- ifelse(
         guide_type,
         1,
-        truncnorm::rtruncnorm(n, a = 0, b = 1, mean = 0.05, sd = 0.07)
+        truncnorm::rtruncnorm(n, a = 0, b = 1, mean = mu_low, sd = sd_low)
       )
     }
 
