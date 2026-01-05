@@ -3,7 +3,7 @@
 DKOsimR is an R package for running Double-CRISPR Knockout Simulation (DKOsim). DKOsim is a simulation framework designed to simulate growth-based dual knockout CRISPR screens. It allows users and investigators to efficiently reproduce synthetic data where both the single gene fitness effect and the interaction of gene pairs can be pre-specified.
 
 ## Installation
-DKOsimR is an open-source R package. To install DKOsimR and all required dependencies via Github, you may use the following commands in R:
+DKOsimR is an open-source R package. A first step is to download R or RStudio and start an R session. To install DKOsimR and all required dependencies via Github, you may use the following commands in R:
 
 ```r
 if(!requireNamespace("devtools", quietly = TRUE))
