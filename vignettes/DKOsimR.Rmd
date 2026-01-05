@@ -539,7 +539,7 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
 
 Codes for the mimicking are provided below, but not run in this tutorial, check full results in the reference article.
 ```{r, eval=FALSE}
-dkosim_lab(sample_name="DKOsimR_246x3x3_1000x_run1",
+dkosim_lab(sample_name="DKOsimR_246x3x3_1000x_mFong_run1",
            coverage=1000,
            n=246,
            n_guide_g=3,
