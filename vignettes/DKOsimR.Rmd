@@ -47,7 +47,7 @@ library(DKOsimR)
 
 Make sure all required dependencies are installed using `devtools::install(dependencies = TRUE)`
 
-## 3. List of tunable parameters:
+## 3. List of Tunable Parameters:
 
 Let's go through the designed parameters in simulation framework. Below list out all tunable parameters and how it is represented in DKOsimR.
 
@@ -256,7 +256,7 @@ dkosim_lab(sample_name="test_lab", n=20)
 
 Alternatively, you may adjust values to any tunable parameters as desired, or using the parameters described in the full article to approximate actual lab data pattern in double CRISPR screens.
 
-## 6. Applying GI Detection Methods on simulated data  
+## 6. Applying GI Detection Methods on Simulated Data  
 
 Here, we show how we may apply dLFC (Dede et al., 2020) to calculate GI on simulated data, as an example to analyze the simulation output.  
 
@@ -429,7 +429,7 @@ scatterplot_dlfc
 
 
 
-## 7. Summary Guidance in picking suitable parameters
+## 7. Summary Guidance in Picking Suitable Parameters
 
 In this section, from empirical DKO simulation runs, we provide a summary guidance on picking suitable parameters to run your simulated CRISPR screens in practice. **Please note that this section is mainly for a general suggestion to pick hyperparameters that could efficiently run simulations in practice, adjust the choice of parameters based on your desires and purpose when using DKOsimR, and check reference article for more detailed info.** Following the list of all tunable parameters: 
 
