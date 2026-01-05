@@ -36,7 +36,7 @@ This tutorial introduces DKOsimR package for generating synthetic CRISPR double 
 
 ## 2. Install and Load DKOsimR
 
-Simply install and load the package into your R session with following commands:
+To start using the package, simply download and install R/RStudio as the first step. You may then install and load the package into your R session with following commands:
 
 ```{r setup and load package}
 if(!requireNamespace("devtools", quietly = TRUE))
