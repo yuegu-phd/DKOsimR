@@ -487,7 +487,7 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
     - `cores_free`: keep default for shortest running time, but increase the number to avoid hard coding issues
 
   
-To approximate patterns from actual laboratory DKO screens. We suggest using `dkosim_lab()` by inputting the same number of genes in each gene class as the laboratory settings. A case example in mimicking Fong-2024 A549 (Fong et al., 2024) has been described in the second major results section of DKOsim article. Here, we provide a list of input parameters for DKOsim (mimicking Fong-2024 A549). Empirically, it took around 2 hours to finish running this approximation with 14 cores enabled for parallel computing.
+**To approximate patterns from actual laboratory DKO screens.** We suggest using `dkosim_lab()` by inputting the same number of genes in each gene class as the laboratory settings. A case example in mimicking Fong-2024 A549 (Fong et al., 2024) has been described in the second major results section of DKOsim article. Here, we provide a list of input parameters for DKOsim (mimicking Fong-2024 A549). Empirically, it took around 2 hours to finish running this approximation with 14 cores enabled for parallel computing.
 
 - Initialized Library Parameters:
 
@@ -512,7 +512,7 @@ To approximate patterns from actual laboratory DKO screens. We suggest using `dk
 
     *1. % of theoretical phenotype to each gene class
     
-    - `pt_neg`: 64/246    
+    - `pt_neg`: 64/246
     - `pt_unknown`: 178/246
     - `pt_ctrl`: 4/246
 
