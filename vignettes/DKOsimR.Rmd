@@ -84,10 +84,15 @@ Let's go through the designed parameters in simulation framework. Below list out
 
 - Guide Parameters:
 
+    *1. high-efficacy guides proportion and CRISPR mode*
+
     - `p_high`: % of high-efficacy guides
     - `mode`: CRISPR mode:
         - use `CRISPRn-100%Eff` if need 100% efficient guides without randomization
         - use `CRISPRn` if need high-efficient guides drawn from distribution
+
+    *2. Mean and std. dev. of guide-efficacy*
+
     - `mu_high`: mean of high-efficacy guides
     - `sd_high`: std. dev of high-efficacy guides
     - `mu_low`: mean of low-efficacy guides
@@ -145,8 +150,13 @@ To generate synthetic double knockout data, **by default, the simulated datasets
 
 - Guide Parameters:
 
+    *1. high-efficacy guides proportion and CRISPR mode*
+
     - `p_high`: 1
     - `mode`: CRISPR mode: `CRISPRn-100%Eff`
+    
+    *2. Mean and std. dev. of guide-efficacy*
+    
     - `mu_high`: 0.9
     - `sd_high`: 0.1
     - `mu_low`: 0.05
@@ -244,8 +254,13 @@ By default, `dkosim_lab` run simulation with following parameter
     
 - Guide Parameters:
 
+    *1. high-efficacy guides proportion and CRISPR mode*
+
     - `p_high`: 0.75
     - `mode`: CRISPR mode: `CRISPRn`
+    
+    *2. Mean and std. dev. of guide-efficacy*
+
     - `mu_high`: 0.9
     - `sd_high`: 0.1
     - `mu_low`: 0.05
@@ -484,10 +499,15 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
     
 - Guide Parameters:
 
+    *1. high-efficacy guides proportion and CRISPR mode*
+
     - `p_high`: 1 by default, set from 0.75 to 0.8 to resemble real lab data.
     - `mode`: CRISPR mode:
         - use `CRISPRn-100%Eff` if need 100% efficient guides without randomization (theoretical case), ensure p_high is 1 when using this mode (default mode)
         - use `CRISPRn` if need high-efficient guides drawn from distribution (practical case for actual lab setting)
+        
+    *2. Mean and std. dev. of guide-efficacy*
+    
     - `mu_high`: keep unchanged with default value of 0.9.
     - `sd_high`: keep unchanged with default value of 0.1.
     - `mu_low`: keep unchanged with default value of 0.05.
@@ -527,7 +547,7 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
     
 - Gene Class Parameters:
 
-    *1. % of theoretical phenotype to each gene class
+    *1. % of theoretical phenotype to each gene class*
     
     - `pt_neg`: 64/246
     - `pt_unknown`: 178/246
@@ -541,8 +561,13 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
 
 - Guide Parameters:
 
+    *1. high-efficacy guides proportion and CRISPR mode*
+
     - `p_high`: 0.75 (default)
     - `mode`: CRISPRn (default)
+    
+    *2. Mean and std. dev. of guide-efficacy*
+
     - `mu_high`: 0.9 (default)
     - `sd_high`: 0.1 (default)
     - `mu_low`: 0.05 (default)
