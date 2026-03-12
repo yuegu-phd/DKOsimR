@@ -468,7 +468,7 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
 
 - Initialized Library Parameters:
 
-    - `sample_name`: name simulation with number of genes, number of guides per gene, number of initialized gene classes, and coverage, seperated by "_". For example, "DKOsimR_120x3x4_100x_run1" indicates the 1st run for DKO simulation run with 120 genes, 3 guides per genes, and all 4 initialized gene classes (negative, wild-type, positive, non-targeting control), with 100x coverage.  
+    - `sample_name`: name simulation with number of genes, number of guides per gene, number of initialized gene classes, and coverage, seperated by "_". For example, "DKOsimR_120x3x4_100x_run1" indicates the 1st run for DKO simulation run with 120 genes, 3 guides per genes, and all 4 initialized gene classes (negative, wild-type, positive, non-targeting control), with 100x coverage.
     - `coverage`: 100 would be sufficient for most cases, set lower to shorten running time but simulated data might have weaker reproducibility.
     - `n`: put the number of unique single gene by desire. 100 would be sufficient for most cases.
     - `n_guide_g`: set as 2 or 3.
@@ -573,7 +573,7 @@ In this section, from empirical DKO simulation runs, we provide a summary guidan
     - `mu_low`: 0.05 (default)
     - `sd_low`: 0.07 (default)
 
-- Bottleneck Parameters:
+- Cell Doublings Parameters:
 
     - `size.bottleneck`: 2 (default)
     - `n.bottlenecks`: 1 (default)
@@ -621,8 +621,8 @@ Column descriptions of Simulated Datasets:
 - `guide_id`: Unique guide ID by numerical order.
 - `gene_pair_id`: Target gene-pair ID.
 - `gene1_gene2_id`: ID of 1st target KO gene and 2nd target KO gene, separated by "_". Any combination with 0 indicates it's SKO. For example, "1_2" indicates we are knocking out gene-pair targeting gene#1 and gene#2; and "1_0" indicates we are knockout out gene#1 only.
-- `guide1_id`: ID of 1st target KO gene with corresponding guide, separate by "_". 
-- `guide2_id`: ID of 2st target KO gene with corresponding guide, separate by "_".
+- `guide1_id`: ID of 1st target KO gene with corresponding guide, separated by "_". 
+- `guide2_id`: ID of 2st target KO gene with corresponding guide, separated by "_".
 - `construct_id`: ID of constructs, containing information for both DKO gene and guide; 1st and 2nd KO target are separated by "__". For example, "1_2__6_3" indicates a construct with 1st target on gene#1 and its second guide targeting it, combined with 2nd target on gene#6 and its third guide targeting it.
 - `gene1`: ID of 1st target KO gene.
 - `gene2`: ID of 2nd target KO gene.
